@@ -28,11 +28,22 @@
                     <button type="button" class="increase">+</button>
                     <button  type="button" class="decrease">-</button>
                 </div>
-        </form>
-            
+                <div class="code">
+                   <select name="tipo" id="type">
+                    <option value="Tipo" disable selected>Tipo</option>
+                    <option class="white" value="PST">PST</option>
+                    <option class="white" value="BMD">BMD</option>
+                    <option class="white" value="MAC">MAC</option>
+                    <option class="white" value="MAM">MAM</option>
+                    <option class="white" value="DPS">DPS</option>
+                   </select>
+                    <input type="text" id="cod" placeholder="Código" required>
+                </div>
+            </form>
             <button type="submit" id="addProduct">Adicionar ao Estoque</button>
             <button id="downloadButton">Download Excel <img src="imgs/download-direto.png" alt="download"></button>
-
+            <a class="retirada" target="_blank" href="Pagina-de-retirada.html">Acessar Página de Retirada</a>
+            
         </div>
     </div>
 
@@ -52,6 +63,7 @@
     </table> -->
 
     <script>
+        
         const inputElement = document.getElementById("productQuantity");
         const decreaseButton = document.querySelector(".decrease");
         const increaseButton = document.querySelector(".increase");

@@ -62,17 +62,18 @@ body {
     display: block;
     margin: auto;
     width: 400px;
-    height: 400px;
+    height: 515px;
     border-radius: 30px;
-    background-color: #cdcdcd5c;
-    margin-top: 100px;
+    background-color: #353c4cbb;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(255, 255, 255, 0.07) 0px 32px 64px;
+    margin-top: 40px;
 }
 h1{
     color: #ffffff;
     text-align: center;
 }
 
-input {
+input, select{
     padding: 8px;
     margin: 8px;
     width: 93.5%;
@@ -81,10 +82,10 @@ input {
     border-radius: 5px;
     font-family: 'Dosis', sans-serif;
     box-shadow: 2px 1px 7px rgba(0, 0, 0, 0.66);
-    color: #fff;
+    color: gray;
     font-size: 17px;
 }
-input:focus {
+input:focus , select:focus {
     border: 2px solid #202430;
     outline: none;
     box-shadow: 0 0 8px #202430;
@@ -107,7 +108,7 @@ button {
     padding: 10px;
 }
 button:hover {
-    background-color: #313644;
+    background-color: #EC8014;
     transition: 0.2s;
     transform: scale(1.1);
 }
@@ -199,7 +200,30 @@ input[type="text"]::-webkit-outer-spin-button {
 }
 
 .input-wrapper button:hover {
-    background-color: #313644;
+    background-color: #EC8014;
 }
+.code{
+    display: flex;
+    padding-bottom: 15px;
+    width: 100%;
+}
+#type{
+    flex-shrink: 2;
+}
+.retirada{
+    text-decoration: none;
+    color: white;
+    font-family: 'Dosis', sans-serif;
+    font-size: 18px;
+    transition: 0.3s;
+    padding-top: 10px;
+}
+.retirada:hover{
+    transition: 0.3s;
+    color: #EC8014;  
+    transform: scale(1.1);
+}
+.white {
 
-
+    color: white;
+}
