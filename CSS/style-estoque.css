@@ -184,7 +184,7 @@ input[type="text"]::-webkit-outer-spin-button {
     width: 100%;
 }
 
-/* Estilize os botões de aumento e diminuição como desejado */
+/* Estilize os botões de aumento e diminuição como desejado */ 
 .input-wrapper button {
     background-color: #454e60;
     color: white;

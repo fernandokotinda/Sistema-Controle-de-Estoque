@@ -19,14 +19,16 @@
         <h1>Controle de Estoque Administrador</h1>
     </div>
     <div class="container">
-        <div class="form">
-            <h2>Adicionar item ao estoque</h2>
-            <input type="text" id="productName" placeholder="Nome do Produto" required autocomplete="off">
-            <div class="input-wrapper">
-                <input type="text" id="productQuantity" placeholder="Quantidade" required>
-                <button class="increase">+</button>
-                <button class="decrease">-</button>
-            </div>
+        <form>
+            <div class="form">
+                <h2>Adicionar item ao estoque</h2>
+                <input type="text" id="productName" placeholder="Nome do Produto" required autocomplete="off">
+                <div class="input-wrapper">
+                    <input type="text" id="productQuantity" placeholder="Quantidade" required>
+                    <button type="button" class="increase">+</button>
+                    <button  type="button" class="decrease">-</button>
+                </div>
+        </form>
             
             <button type="submit" id="addProduct">Adicionar ao Estoque</button>
             <button id="downloadButton">Download Excel <img src="imgs/download-direto.png" alt="download"></button>
