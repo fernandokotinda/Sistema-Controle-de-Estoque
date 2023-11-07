@@ -15,6 +15,7 @@ body {
     background-attachment: fixed;
     height: 100vh;
     margin: 0;
+
 }
 #header {
 
@@ -49,13 +50,22 @@ body {
 }
 .form h2 {
 
-    font-size: 20px;
+    font-size: 30px;
+    text-align: justify;
     font-family: 'Lexend', sans-serif;
     margin: 30px;
+    color: rgb(255, 255, 255);
+    text-shadow: rgba(0, 0, 0, 0.719) 3px 4px 7px;
+    
 }
 .container{
-    display: flex;
-    margin-top: 225px;
+    display: block;
+    margin: auto;
+    width: 400px;
+    height: 400px;
+    border-radius: 30px;
+    background-color: #cdcdcd5c;
+    margin-top: 100px;
 }
 h1{
     color: #ffffff;
@@ -70,7 +80,7 @@ input {
     background-color: #202430;
     border-radius: 5px;
     font-family: 'Dosis', sans-serif;
-    box-shadow: 2px 1px 7px rgb(255 255 255 / 20%);
+    box-shadow: 2px 1px 7px rgba(0, 0, 0, 0.66);
     color: #fff;
     font-size: 17px;
 }
