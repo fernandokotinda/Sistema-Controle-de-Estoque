@@ -1,0 +1,124 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Dosis&display=swap');
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(170deg, rgba(49, 57, 73, 0.8) 20%, rgba(49, 57, 73, 0.5) 20%, rgba(49, 57, 73, 0.5) 35%, rgba(41, 48, 61, 0.6) 35%, rgba(41, 48, 61, 0.8) 45%, rgba(31, 36, 46, 0.5) 45%, rgba(31, 36, 46, 0.8) 75%, rgba(49, 57, 73, 0.5) 75%), linear-gradient(45deg, rgba(20, 24, 31, 0.8) 0%, rgba(41, 48, 61, 0.8) 50%, rgba(82, 95, 122, 0.8) 50%, rgba(133, 146, 173, 0.8) 100%) #313949;
+    height: 100vh;
+    margin: 0;
+}
+
+.form {
+    width: 300px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
+    margin: auto;
+}
+.container{
+    display: flex;
+    margin-top: 225px;
+}
+h1{
+    color: #ffffff;
+    text-align: center;
+}
+
+input {
+    padding: 8px;
+    margin: 8px;
+    width: 93.5%;
+    transition: 0.2s;
+    background-color: #202430;
+    border-radius: 5px;
+    font-family: 'Dosis', sans-serif;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    font-size: 17px;
+}
+input:focus {
+    border: 2px solid #202430;
+    outline: none;
+    box-shadow: 0 0 8px #202430;
+    scale: 1.1;
+    transition: 0.2s;
+}
+button {
+    background-color: #2C3342;
+    border: none;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 8px;
+    width: 100%;
+    margin-bottom: 15px;
+    transition: 0.2s;
+    font-family: 'Dosis', sans-serif;
+    font-size: 17px;
+    padding: 10px;
+}
+button:hover {
+    background-color: #454E63;
+    transition: 0.2s;
+    transform: scale(1.1);
+}
+#downloadButton img{   
+    width: 18px;
+    height: 18px;
+    padding-left: 10px;
+    transform: translate(0, 2px);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 1;
+}
+
+.modal-content {
+    background-color: #404A5F;
+    margin: 10% auto;
+    padding: 20px;
+    width: 60%;
+    max-width: 400px;
+    text-align: center;
+    border-radius: 10px;
+    color: #fff;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+
+.fechar {
+    color: #fff;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.fechar:hover {
+    color: #333;
+    transition: 0.2s;
+}
+#mostrarPopUp {
+    background-color: #2C3342;
+    border: none;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 8px;
+    width: 100%;
+    margin-bottom: 15px;
+    transition: 0.2s;
+    font-family: 'Dosis', sans-serif;
+    font-size: 17px;
+    padding: 10px;
+}
+
+#mostrarPopUp:hover {
+    background-color: #454E63;
+}

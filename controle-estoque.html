@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/style-estoque.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+
+    <link rel="shortcut icon" href="imgs/logo sea.png" type="image/x-icon">
+    <title>Controle de Estoque</title>
+</head>
+<body>
+        <h1>Controle de Estoque Administrador</h1>
+        <div class="container">
+            <div class="form">
+                    <input type="text" id="productName" placeholder="Nome do Produto" autofocus required>
+                    <input type="number" id="productQuantity" placeholder="Quantidade" required>
+                    <button type="submit" id="addProduct">Adicionar ao Estoque</button>
+                    <button id="downloadButton">Download Excel <img src="imgs/download-direto.png" alt=""></button>
+                    
+            </div>
+        </div>
+
+        <div id="popUp" class="modal">
+            <div class="modal-content">
+                <span class="fechar" id="fecharPopUp">&times;</span>
+                <p>Produto adicionado com sucesso!&#10004</p>
+            </div>
+        </div>
+    
+        
+        <!-- <table id="estoque">
+        <tr>
+            <td>Produto</td>
+            <td>Quantidade</td>
+        </tr>
+    </table>-->
+
+
+      
+    <script>
+        document.getElementById("addProduct").addEventListener("click", function() {
+    document.getElementById("popUp").style.display = "block";
+});
+
+document.getElementById("fecharPopUp").addEventListener("click", function() {
+    document.getElementById("popUp").style.display = "none";
+});
+
+window.addEventListener("click", function(event) {
+    if (event.target == document.getElementById("popUp")) {
+        document.getElementById("popUp").style.display = "none";
+    }
+});
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const addButton = document.getElementById("downloadButton");
+        addButton.addEventListener("click", function () {
+        addButton.disabled = true;
+        addButton.innerHTML = "Baixando...";
+
+        setTimeout(function () {
+            addButton.disabled = false;
+            addButton.innerHTML = "Download Realizado!";
+
+            const imagem = document.createElement("img");
+                setTimeout(function () {
+                addButton.innerHTML = "Baixar Novamente"; 
+            }, 2000); 
+        }, 2000); 
+    });
+});
+
+
+        let addProduct = document.getElementById("addProduct");
+        let downloadButton = document.getElementById("downloadButton");
+
+        addProduct.addEventListener('click', () => {
+
+            let productNameInput = document.getElementById("productName").value;
+            let productQuantityInput = document.getElementById("productQuantity").value;
+
+            let table = document.getElementById("estoque");
+
+            let tr = document.createElement('tr');
+            table.appendChild(tr);
+
+            let item = document.createElement('td');
+            item.classList.add('item');
+            item.innerText = productNameInput;
+
+            let quantity = document.createElement('td');
+            quantity.classList.add('quantity');
+            quantity.innerText = productQuantityInput;
+
+            tr.append(item, quantity)
+            
+
+        })
+     
+        $('#downloadButton').click(function () {
+            $("#estoque").table2excel({
+                filename: "Estoque.xls"
+            });
+        });
+      
+    </script>
+</body>
+</html>
