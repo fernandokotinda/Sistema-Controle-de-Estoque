@@ -1,14 +1,47 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Dosis&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
 
 body {
     font-family: Arial, Helvetica, sans-serif;
     background: linear-gradient(170deg, rgba(49, 57, 73, 0.8) 20%, rgba(49, 57, 73, 0.5) 20%, rgba(49, 57, 73, 0.5) 35%, rgba(41, 48, 61, 0.6) 35%, rgba(41, 48, 61, 0.8) 45%, rgba(31, 36, 46, 0.5) 45%, rgba(31, 36, 46, 0.8) 75%, rgba(49, 57, 73, 0.5) 75%), linear-gradient(45deg, rgba(20, 24, 31, 0.8) 0%, rgba(41, 48, 61, 0.8) 50%, rgba(82, 95, 122, 0.8) 50%, rgba(133, 146, 173, 0.8) 100%) #313949;
+    background-size: cover;
+    background-attachment: fixed;
     height: 100vh;
     margin: 0;
 }
+#header {
+
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+#header img {
+
+    width: 17rem;
+    height: 7rem;
+    margin: 0;
+}
+#header h1 {
+
+    margin-left: 200px;
+    font-family: 'Lexend', sans-serif;
+    font-size: 35px;
+    color: rgb(244, 244, 244);
+    text-shadow: rgba(0, 0, 0, 0.719) 3px 4px 7px;
+}
 
 .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 300px;
     color: white;
     background-color: rgba(0, 0, 0, 0);
@@ -31,7 +64,7 @@ input {
     background-color: #202430;
     border-radius: 5px;
     font-family: 'Dosis', sans-serif;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 1px 7px rgb(255 255 255 / 20%);
     color: #fff;
     font-size: 17px;
 }
@@ -41,15 +74,16 @@ input:focus {
     box-shadow: 0 0 8px #202430;
     scale: 1.1;
     transition: 0.2s;
+    box-shadow: 2px 1px 7px rgb(255 255 255 / 20%);
 }
 button {
-    background-color: #2C3342;
+    background-color: #454e60;
     border: none;
     color: white;
-    border-radius: 20px;
+    border-radius: 30px;
     cursor: pointer;
     margin: 8px;
-    width: 100%;
+    width: 90%;
     margin-bottom: 15px;
     transition: 0.2s;
     font-family: 'Dosis', sans-serif;
@@ -57,12 +91,12 @@ button {
     padding: 10px;
 }
 button:hover {
-    background-color: #454E63;
+    background-color: #313644;
     transition: 0.2s;
     transform: scale(1.1);
 }
 #downloadButton img{   
-    width: 18px;
+    width: 25px;
     height: 18px;
     padding-left: 10px;
     transform: translate(0, 2px);
@@ -122,3 +156,34 @@ button:hover {
 #mostrarPopUp:hover {
     background-color: #454E63;
 }
+/* Ocultar as setas de aumento e diminuição */
+input[type="text"]::-webkit-inner-spin-button,
+input[type="text"]::-webkit-outer-spin-button {
+    display: none;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* Estilize os botões de aumento e diminuição como desejado */
+.input-wrapper button {
+    background-color: #454e60;
+    color: white;
+    font-size: 20px;
+    border: none;
+    padding: 7px 10px;
+    cursor: pointer;
+}
+.increase, .decrease {
+
+    flex-shrink: 2;
+}
+
+.input-wrapper button:hover {
+    background-color: #313644;
+}
+
+

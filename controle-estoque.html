@@ -14,13 +14,21 @@
 </head>
 
 <body>
-    <h1>Controle de Estoque Administrador</h1>
+    <div id="header">
+        <img src="imgs/logo-pagina.png" alt="Logo">
+        <h1>Controle de Estoque Administrador</h1>
+    </div>
     <div class="container">
         <div class="form">
-            <input type="text" id="productName" placeholder="Nome do Produto" autofocus required>
-            <input type="number" id="productQuantity" placeholder="Quantidade" required>
+            <input type="text" id="productName" placeholder="Nome do Produto" required autocomplete="off">
+            <div class="input-wrapper">
+                <input type="text" id="productQuantity" placeholder="Quantidade" required>
+                <button class="increase">+</button>
+                <button class="decrease">-</button>
+            </div>
+            
             <button type="submit" id="addProduct">Adicionar ao Estoque</button>
-            <button id="downloadButton">Download Excel <img src="imgs/download-direto.png" alt=""></button>
+            <button id="downloadButton">Download Excel <img src="imgs/download-direto.png" alt="download"></button>
 
         </div>
     </div>
@@ -38,7 +46,24 @@
             <td>Produto</td>
             <td>Quantidade</td>
         </tr>
-    </table>-->
+    </table> -->
+
+    <script>
+        const inputElement = document.getElementById("productQuantity");
+        const decreaseButton = document.querySelector(".decrease");
+        const increaseButton = document.querySelector(".increase");
+
+        decreaseButton.addEventListener("click", () => {
+            const currentValue = parseInt(inputElement.value) || 0;
+            inputElement.value = Math.max(0, currentValue - 1);
+        });
+
+        increaseButton.addEventListener("click", () => {
+            const currentValue = parseInt(inputElement.value) || 0;
+            inputElement.value = currentValue + 1;
+        });
+
+    </script>
 
     <script>
         document.getElementById("addProduct").addEventListener("click", function () {
@@ -59,19 +84,20 @@
             const addButton = document.getElementById("downloadButton");
             addButton.addEventListener("click", function () {
                 addButton.disabled = true;
+                const originalText = addButton.innerHTML; 
+
                 addButton.innerHTML = "Baixando...";
 
                 setTimeout(function () {
-                    addButton.disabled = false;
                     addButton.innerHTML = "Download Realizado!";
 
-                    const imagem = document.createElement("img");
-                    setTimeout(function () {
-                        addButton.innerHTML = "Baixar Novamente";
-                    }, 2000);
-                }, 2000);
-            });
+                setTimeout(function () {
+                    addButton.disabled = false;
+                    addButton.innerHTML = originalText; 
+                }, 1500); 
+            }, 1000);
         });
+    });
     </script>
 
     <script>
