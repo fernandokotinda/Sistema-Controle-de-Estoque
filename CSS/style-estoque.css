@@ -47,6 +47,12 @@ body {
     background-color: rgba(0, 0, 0, 0);
     margin: auto;
 }
+.form h2 {
+
+    font-size: 20px;
+    font-family: 'Lexend', sans-serif;
+    margin: 30px;
+}
 .container{
     display: flex;
     margin-top: 225px;
