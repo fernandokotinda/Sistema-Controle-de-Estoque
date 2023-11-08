@@ -89,6 +89,10 @@ h1{
     color: #ffffff;
     text-align: center;
 }
+#productQuantity {
+
+    flex-shrink: 1.7;
+}
 #addProduct:hover {
 
     background-color: #657289;
@@ -207,7 +211,7 @@ button:active{
 #mostrarPopUp:hover {
     background-color: #454E63;
 }
-/* Ocultar as setas de aumento e diminuição */
+
 input[type="text"]::-webkit-inner-spin-button,
 input[type="text"]::-webkit-outer-spin-button {
     display: none;
@@ -219,23 +223,24 @@ input[type="text"]::-webkit-outer-spin-button {
     width: 100%;
 }
 
-/* Estilize os botões de aumento e diminuição como desejado */ 
 .input-wrapper button {
-    background-color: #454e60;
-    color: white;
+    background-color: #626f8d;
+    color: rgb(0, 0, 0);
     font-size: 20px;
     border: none;
     padding: 7px 10px;
     cursor: pointer;
 }
+.input-wrapper button:hover {
+
+    background-color: #8c9eca;
+}
 .increase, .decrease {
 
     flex-shrink: 2;
+    width: 70px;
 }
 
-.input-wrapper button:hover {
-    background-color: #EC8014;
-}
 .code{
     display: flex;
     padding-bottom: 15px;
