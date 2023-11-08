@@ -51,7 +51,7 @@ body {
 .form h2 {
 
     font-size: 30px;
-    text-align: justify;
+    text-align: center;
     font-family: 'Lexend', sans-serif;
     margin: 30px;
     color: rgb(255, 255, 255);
@@ -224,6 +224,5 @@ input[type="text"]::-webkit-outer-spin-button {
     transform: scale(1.1);
 }
 .white {
-
     color: white;
 }
