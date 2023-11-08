@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="CSS/style-estoque.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
-
     <link rel="shortcut icon" href="imgs/logo sea.png" type="image/x-icon">
     <title>Controle de Estoque</title>
 </head>
@@ -55,7 +54,6 @@
         </div>
     </div>
 
-
     <table id="estoque1">
         <tr>
             <td>Produto</td>
@@ -72,11 +70,13 @@
     
     <script>
 
-        $('#downloadButton').click(function () {
-            $("#estoque1").table2excel({
-                filename: "Estoque.xls"
-            });
+    $('#downloadButton').click(function () {
+        $("#estoque1").table2excel({
+            filename: "Estoque.xls",
+            sheetName: "Estoque1" 
         });
+        
+    });
 
     </script>
 
@@ -84,6 +84,3 @@
 </body>
 
 </html>
-
-
-<!-- Como eu substituo a biblioteca table2excel que está no meu projeto para a biblioteca exceljs, de forma que a tabela com id "estoque1" fique em uma planilha separa da tabela com id "estoque2", porém a duas devem estar dentro do mesmo arquivo excel que deve ser baixado ao clicar no botão com id "downloadButton" -->
