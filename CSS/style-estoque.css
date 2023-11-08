@@ -224,8 +224,8 @@ input[type="text"]::-webkit-outer-spin-button {
 }
 
 .input-wrapper button {
-    background-color: #626f8d;
-    color: rgb(0, 0, 0);
+    background-color: #4A5468;
+    color: #fff;
     font-size: 20px;
     border: none;
     padding: 7px 10px;
@@ -233,7 +233,7 @@ input[type="text"]::-webkit-outer-spin-button {
 }
 .input-wrapper button:hover {
 
-    background-color: #8c9eca;
+    background-color: #6c7a96;
 }
 .increase, .decrease {
 
