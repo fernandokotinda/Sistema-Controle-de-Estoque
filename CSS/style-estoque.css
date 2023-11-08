@@ -37,7 +37,13 @@ body {
     color: rgb(244, 244, 244);
     text-shadow: rgba(0, 0, 0, 0.719) 3px 4px 7px;
 }
-
+.btn-top{
+    width: 160px;
+    height: 57px;
+    margin-left: auto;
+    background-color: #ec8014cc;
+    margin-right: 35px;
+}
 .form {
     display: flex;
     flex-direction: column;
