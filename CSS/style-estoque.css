@@ -115,7 +115,7 @@ input, select{
     border-radius: 5px;
     font-family: 'Dosis', sans-serif;
     box-shadow: 2px 1px 7px rgba(0, 0, 0, 0.66);
-    color: gray;
+    color: rgb(255, 255, 255);
     font-size: 17px;
 }
 input:focus , select:focus {
@@ -248,6 +248,7 @@ input[type="text"]::-webkit-outer-spin-button {
 }
 #type{
     flex-shrink: 2;
+    color: gray;
 }
 .retirada{
     text-decoration: none;
@@ -262,6 +263,13 @@ input[type="text"]::-webkit-outer-spin-button {
     color: #EC8014;  
     transform: scale(1.1);
 }
+.gray {
+
+    color: gray;
+}
 .white {
     color: white;
+}
+element.style {
+    color: gray;
 }
