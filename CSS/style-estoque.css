@@ -20,6 +20,7 @@ body {
 #header {
 
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 10px;
 }
@@ -29,18 +30,23 @@ body {
     height: 7rem;
     margin: 0;
 }
+#header button img {
+    width: 20px;
+    height: 20px;
+    margin: -6px;
+    margin-left: 10px;
+}
 #header h1 {
-
-    margin-left: 200px;
     font-family: 'Lexend', sans-serif;
     font-size: 35px;
     color: rgb(244, 244, 244);
     text-shadow: rgba(0, 0, 0, 0.719) 3px 4px 7px;
 }
 .btn-top{
-    width: 160px;
-    height: 57px;
-    margin-left: auto;
+    width: 202px;
+    height: 65px;
+    box-shadow: rgba(0, 0, 0, 0.668) 3px 5px 12px;
+    font-size: 18px;
     background-color: #ec8014cc;
     margin-right: 35px;
 }
@@ -108,6 +114,8 @@ button {
     margin: 8px;
     width: 90%;
     margin-bottom: 15px;
+    border: 2px solid #00000091;
+    box-shadow: rgba(0, 0, 0, 0.473) 3px 5px 12px;
     transition: 0.2s;
     font-family: 'Dosis', sans-serif;
     font-size: 17px;
@@ -117,6 +125,9 @@ button:hover {
     background-color: #EC8014;
     transition: 0.2s;
     transform: scale(1.1);
+}
+button:active{
+    transform: scale(0.9);
 }
 #downloadButton img{   
     width: 25px;

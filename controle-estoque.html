@@ -17,7 +17,7 @@
     <div id="header">
         <img src="imgs/logo-pagina.png" alt="Logo">
         <h1>Controle de Estoque Administrador</h1>
-        <button class="btn-top" type="button">Página de Retirada</button>
+        <a target="_blank"href="Pagina-de-retirada.html"><button class="btn-top" type="button"> Página de Retirada<img src="imgs/seta-direita.png" alt="Seta para Direita"></button></a>
     </div>
     <div class="container">
         <form>
@@ -25,7 +25,7 @@
                 <h2>Adicionar item ao estoque</h2>
                 <input type="text" id="productName" placeholder="Nome do Produto" required autocomplete="off">
                 <div class="input-wrapper">
-                    <input type="text" id="productQuantity" placeholder="Quantidade" required>
+                    <input type="text" id="productQuantity" placeholder="Quantidade" required autocomplete="off">
                     <button type="button" class="increase">+</button>
                     <button  type="button" class="decrease">-</button>
                 </div>
@@ -38,7 +38,7 @@
                     <option class="white" value="MAM">MAM</option>
                     <option class="white" value="DPS">DPS</option>
                    </select>
-                    <input type="text" id="cod" placeholder="Código" required>
+                    <input type="text" id="cod" placeholder="Código" required autocomplete="off">
                 </div>
             </form>
             <button type="submit" id="addProduct">Adicionar ao Estoque</button>
