@@ -50,6 +50,10 @@ body {
     background-color: #ec8014cc;
     margin-right: 35px;
 }
+.btn-top:hover {
+
+    background-color: rgb(255, 153, 51);
+}
 .form {
     display: flex;
     flex-direction: column;
@@ -83,6 +87,18 @@ body {
 h1{
     color: #ffffff;
     text-align: center;
+}
+#addProduct:hover {
+
+    background-color: #657289;
+}
+#downloadButton {
+
+    background-color: #ec8014cc;
+}
+#downloadButton:hover {
+
+    background-color: #ffa041cc;
 }
 
 input, select{

@@ -31,7 +31,7 @@
                 </div>
                 <div class="code">
                    <select name="tipo" id="type">
-                    <option value="Tipo" disable selected>Tipo</option>
+                    <option class="gray" value="Tipo" disable selected>Tipo</option>
                     <option class="white" value="PST">PST</option>
                     <option class="white" value="BMD">BMD</option>
                     <option class="white" value="MAC">MAC</option>
@@ -62,6 +62,23 @@
             <td>Quantidade</td>
         </tr>
     </table> -->
+
+    <script>
+        const selectElement = document.getElementById("type");
+        const types = document.querySelector('.gray');
+    
+        selectElement.addEventListener("change", function () {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+    
+            if (selectedOption.classList.contains("white")) {
+                selectElement.style.color = "white";
+                types.style.color = "gray";
+            } else {
+                selectElement.style.color = "gray"; 
+            }
+        });
+    </script>
+    
 
     <script>
         
