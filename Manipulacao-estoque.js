@@ -5,7 +5,7 @@ let downloadButton = document.getElementById("downloadButton");
 
 
     addProduct.addEventListener('click', () => {
-
+        
         let productNameInput = document.getElementById("productName").value;
         let productQuantityInput = document.getElementById("productQuantity").value;
         let select = document.getElementById('type');
@@ -38,20 +38,25 @@ let downloadButton = document.getElementById("downloadButton");
 
 
 //Adiconar janela de aviso
-// document.getElementById("addProduct").addEventListener("click", function () {
-//     document.getElementById("popUp").style.display = "block";
-// });
+document.getElementById("addProduct").addEventListener("click", function () {
+    document.getElementById("popUp").style.display = "block";
+});
 
-// document.getElementById("fecharPopUp").addEventListener("click", function () {
-//     document.getElementById("popUp").style.display = "none";
-// });
+document.getElementById("fecharPopUp").addEventListener("click", function () {
+    document.getElementById("popUp").style.display = "none";
+});
 
-// window.addEventListener("click", function (event) {
-//     if (event.target == document.getElementById("popUp")) {
-//         document.getElementById("popUp").style.display = "none";
-//     }
-// });
+document.getElementById("ok").addEventListener("click", function () {
+    document.getElementById("popUp").style.display = "none";
+});
 
+window.addEventListener("click", function (event) {
+    if (event.target == document.getElementById("popUp")) {
+        document.getElementById("popUp").style.display = "none";
+    }
+});
+
+//Texto ao clicar para baixar
 document.addEventListener("DOMContentLoaded", function () {
 
     const addButton = document.getElementById("downloadButton");

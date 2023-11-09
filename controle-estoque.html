@@ -50,7 +50,8 @@
     <div id="popUp" class="modal">
         <div class="modal-content">
             <span class="fechar" id="fecharPopUp">&times;</span>
-            <p>Produto adicionado com sucesso!&#10004</p>
+            <p class="popUpMessage">Produto adicionado com sucesso!&#10004</p>
+            <button type="button" id="ok">OK</button>
         </div>
     </div>
 
@@ -69,7 +70,6 @@
     </table>
     
     <script>
-
     $('#downloadButton').click(function () {
         $("#estoque1").table2excel({
             filename: "Estoque.xls",
@@ -77,8 +77,47 @@
         });
         
     });
-
+    
     </script>
+
+        <script>
+            let clickAddProduct = document.querySelector('#addProduct');
+            let popUp = document.getElementById("popUp");
+            let exitPopUp = document.getElementById("fecharPopUp");
+            let message = document.querySelector(".popUpMessage");
+            let ok = document.querySelector("#ok");
+
+
+            clickAddProduct.addEventListener('click', () => {
+
+                let quantity = document.querySelector('#productQuantity').value;
+
+                let regex = /^[1-9]\d*$/;
+
+                if (!regex.test(quantity)) {
+
+                    message.textContent = "Digite apenas números inteiros maiores que 0";
+                    productQuantity.classList.add('erro')
+                    popUp.style.display = "block";
+
+                    exitPopUp.addEventListener("click", function () {
+                    popUp.style.display = "none";
+                    productQuantity.classList.remove('erro')
+                    document.getElementById('productQuantity').value = '';
+                    
+                    });
+
+                    ok.addEventListener("click", function () {
+                    popUp.style.display = "none";
+                    productQuantity.classList.remove('erro')
+                    document.getElementById('productQuantity').value = '';
+                    
+                    });
+                    
+                }
+            })
+
+        </script>
 
     <script src="Manipulacao-estoque.js"></script>
 </body>
