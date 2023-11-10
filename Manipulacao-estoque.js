@@ -4,57 +4,65 @@ let addProduct = document.getElementById("addProduct");
 let downloadButton = document.getElementById("downloadButton");
 
 
-    addProduct.addEventListener('click', () => {
-        
+    addProduct.addEventListener('click', (ev) => {
+
         let productNameInput = document.getElementById("productName").value;
         let productQuantityInput = document.getElementById("productQuantity").value;
+        let productQuantity = document.getElementById("productQuantity");
         let select = document.getElementById('type');
         let selectType = document.getElementById('type').value;
-        let code = document.getElementById('cod');
+        let code = document.getElementById('cod').value;
 
-        let table = document.getElementById("estoque1");
+        if(productNameInput !== '' && code !== '' && productQuantityInput !== '' && !productQuantity.classList.contains('erro')) {
 
-        let tr = document.createElement('tr');
-        table.appendChild(tr);
+            ev.preventDefault();
+    
+            let table = document.getElementById("estoque1");
+    
+            let tr = document.createElement('tr');
+            table.appendChild(tr);
+    
+            let item = document.createElement('td');
+            item.classList.add('item');
+            item.innerText = productNameInput;
+    
+            let quantity = document.createElement('td');
+            quantity.classList.add('quantity');
+            quantity.innerText = productQuantityInput;
+    
+            tr.append(item, quantity)
+            
+            document.getElementById('productName').value = '';
+            document.getElementById('productQuantity').value = '';
+            document.getElementById('type').value = 'Tipo';
+            select.style.color = 'gray'
+            document.getElementById('cod').value = '';
+        }
 
-        let item = document.createElement('td');
-        item.classList.add('item');
-        item.innerText = productNameInput;
 
-        let quantity = document.createElement('td');
-        quantity.classList.add('quantity');
-        quantity.innerText = productQuantityInput;
+    });
 
-        tr.append(item, quantity)
-
-        document.getElementById('productName').value = '';
-        document.getElementById('productQuantity').value = '';
-        document.getElementById('type').value = 'Tipo';
-        select.style.color = 'gray'
-        document.getElementById('cod').value = '';
-        
-
-})
+    
 
 
-//Adiconar janela de aviso
-document.getElementById("addProduct").addEventListener("click", function () {
-    document.getElementById("popUp").style.display = "block";
-});
+// //Adiconar janela de aviso
+// document.getElementById("addProduct").addEventListener("click", function () {
+//     document.getElementById("popUp").style.display = "block";
+// });
 
-document.getElementById("fecharPopUp").addEventListener("click", function () {
-    document.getElementById("popUp").style.display = "none";
-});
+// document.getElementById("fecharPopUp").addEventListener("click", function () {
+//     document.getElementById("popUp").style.display = "none";
+// });
 
-document.getElementById("ok").addEventListener("click", function () {
-    document.getElementById("popUp").style.display = "none";
-});
+// document.getElementById("ok").addEventListener("click", function () {
+//     document.getElementById("popUp").style.display = "none";
+// });
 
-window.addEventListener("click", function (event) {
-    if (event.target == document.getElementById("popUp")) {
-        document.getElementById("popUp").style.display = "none";
-    }
-});
+// window.addEventListener("click", function (event) {
+//     if (event.target == document.getElementById("popUp")) {
+//         document.getElementById("popUp").style.display = "none";
+//     }
+// });
 
 //Texto ao clicar para baixar
 document.addEventListener("DOMContentLoaded", function () {
