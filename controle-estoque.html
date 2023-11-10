@@ -40,12 +40,12 @@
                     <option class="white" value="DPS">DPS</option>
                    </select>
                     <input type="text" id="cod" placeholder="Código" required autocomplete="off" minlength="6" maxlength="6">
+                </form>
                 </div>
                 <button type="submit" id="addProduct">Adicionar ao Estoque</button>
                 <button type="button" id="downloadButton">Download Excel <img src="imgs/download-direto.png" alt="download"></button>
                 <a class="retirada" target="_blank" href="Pagina-de-retirada.html">Retirar produto do estoque</a>
                 </div>
-        </form>
     </div>
 
     <div id="popUp" class="modal">
@@ -97,13 +97,13 @@
         clickAddProduct.addEventListener('click', (ev) => {
             
             let quantity = document.querySelector('#productQuantity').value;
-            
+            let cod = document.getElementById('cod').value;
             let regex = /^[1-9]\d*$/;
             
             let selectValue = document.querySelector('#type').value;
             let selected = document.getElementById('type');
 
-            if(quantity !== '') {
+            if(quantity !== '' && cod !== '') {
 
                 ev.preventDefault();
                 if (!regex.test(quantity)) {
