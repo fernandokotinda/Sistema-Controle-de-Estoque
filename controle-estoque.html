@@ -32,7 +32,7 @@
                 </div>
                 <div class="code">
                    <select name="tipo" id="type">
-                    <option class="gray" value="Tipo" disable selected>Tipo</option>
+                    <option class="gray" value="Tipo" disable selected hidden>Tipo</option>
                     <option class="white" value="PST">PST</option>
                     <option class="white" value="BMD">BMD</option>
                     <option class="white" value="MAC">MAC</option>
@@ -96,68 +96,187 @@
         
         clickAddProduct.addEventListener('click', (ev) => {
             
+            let name = document.querySelector('#productName').value;
             let quantity = document.querySelector('#productQuantity').value;
-            let cod = document.getElementById('cod').value;
+            let code = document.getElementById('cod').value;
+            let codeInput = document.getElementById('cod');
             let regex = /^[1-9]\d*$/;
-            
+            let regexCode = /^[0-9]\d*$/;
+
+            let select = document.getElementById('type');
             let selectValue = document.querySelector('#type').value;
-            let selected = document.getElementById('type');
-
-            if(quantity !== '' && cod !== '') {
-
+        
+            
+            
+            if(name !== '' && quantity !== '' && code !== '') {
+                
                 ev.preventDefault();
-                if (!regex.test(quantity)) {
-    
-                    message.textContent = "Digite apenas números inteiros maiores que 0";
-                    productQuantity.classList.add('erro')
+
+                function errorQuantity() {
+
+                    message.textContent = "Digite apenas números inteiros maiores que 0.";
+                    productQuantity.classList.add('erro');
                     popUp.style.display = "block";
     
                     exitPopUp.addEventListener("click", function () {
                     popUp.style.display = "none";
-                    productQuantity.classList.remove('erro')
+                    productQuantity.classList.remove('erro');
                     document.getElementById('productQuantity').value = '';
-                    if(selectValue === 'Tipo') {error()};
+
+                    if(selectValue === 'Tipo') {errorType()};
+                    if(!regexCode.test(code)) {errorCodeRegex()};
+                    if(code.length < 6) {errorCodeLength()};
                     
                     });
     
                     ok.addEventListener("click", function () {
                     popUp.style.display = "none";
-                    productQuantity.classList.remove('erro')
+                    productQuantity.classList.remove('erro');
                     document.getElementById('productQuantity').value = '';
-                    if(selectValue === 'Tipo') {error()};
+                    
+                    if(selectValue === 'Tipo') {
+                        errorType()
+                        if(!regexCode.test(code)) {
+                            errorCodeRegex()
+                            if(code.length < 6) {errorCodeLength()};
+                        };
+
+                    } else if(!regexCode.test(code)) {
+
+
+                    }
                     
                     });
-                    
-                }
-                if(selectValue === 'Tipo') {
-    
-                    function error() {
-    
-            
-                        message.textContent = "Por favor, Escolha qual o tipo do Produto";
-                        selected.classList.add('erro');
-                        popUp.style.display = "block";
-        
-                        exitPopUp.addEventListener("click", function () {
-                        popUp.style.display = "none";
-                        selected.classList.remove('erro')
-                        document.getElementById('type').value = 'Tipo';
-                        select.style.color = 'gray'
-                        
-                        });
-        
-                        ok.addEventListener("click", function () {
-                        popUp.style.display = "none";
-                        selected.classList.remove('erro')
-                        document.getElementById('type').value = 'Tipo';
-                        select.style.color = 'gray'
-            
-                        });
-        
-                    }
-                    if(regex.test(quantity)){error()};
-                }
 
+                }
+                
+                function errorType() {
+        
+                    message.textContent = "Por favor, Escolha qual o tipo do Produto.";
+                    select.classList.add('erro');
+                    popUp.style.display = "block";
+    
+                    exitPopUp.addEventListener("click", function () {
+                    popUp.style.display = "none";
+                    select.classList.remove('erro');
+                    select.value = 'Tipo';
+                    select.style.color = 'gray'
+
+                    if(!regex.test(quantity)) {errorQuantity()};
+                    if(!regexCode.test(code)) {errorCodeRegex()};
+                    if(code.length < 6) {errorCodeLength()};
+
+                    if(regex.test(quantity)){document.querySelector('#productQuantity').value = quantity};
+                    // if(regexCode.test(code)){document.getElementById('cod').value = code}
+                    // if(!code.length < 6){document.getElementById('cod').value = code}
+                    
+                    });
+    
+                    ok.addEventListener("click", function () {
+                    popUp.style.display = "none";
+                    select.classList.remove('erro')
+                    select.value = 'Tipo';
+                    select.style.color = 'gray'
+
+                    if(!regex.test(quantity)) {errorQuantity()};
+                    if(!regexCode.test(code)) {errorCodeRegex()};
+                    if(code.length < 6) {errorCodeLength()};
+
+                    if(regex.test(quantity)){document.querySelector('#productQuantity').value = quantity};
+                    // if(regexCode.test(code)){document.getElementById('cod').value = code};
+                    // if(!code.length < 6){document.getElementById('cod').value = code};
+                    
+                });
+                
+            }
+            
+            function errorCodeRegex() {
+
+                message.textContent = "O código deve conter apenas números inteiros maiores que 0.";
+                codeInput.classList.add('erro')
+                popUp.style.display = "block";
+
+                exitPopUp.addEventListener("click", function () {
+                popUp.style.display = "none";
+                codeInput.classList.remove('erro')
+                document.getElementById('cod').value = '';
+
+                if(!regex.test(quantity)) {errorQuantity()};
+                if(selectValue === 'Tipo') {errorType()};
+                if(code.length < 6) {errorCodeLength()};
+                
+                });
+
+                ok.addEventListener("click", function () {
+                popUp.style.display = "none";
+                codeInput.classList.remove('erro')
+                document.getElementById('cod').value = '';
+
+                if(!regex.test(quantity)) {errorQuantity()};
+                if(selectValue === 'Tipo') {errorType()};
+                if(code.length < 6) {errorCodeLength()};
+                
+                });
+            
+            }
+            
+            function errorCodeLength() {
+
+                message.textContent = "O código deve conter exatos 6 números.";
+                codeInput.classList.add('erro')
+                popUp.style.display = "block";
+
+                exitPopUp.addEventListener("click", function () {
+                popUp.style.display = "none";
+                codeInput.classList.remove('erro')
+                document.getElementById('cod').value = '';
+
+                if(!regex.test(quantity)) {errorQuantity()};
+                if(selectValue === 'Tipo') {errorType()};
+                if(!regexCode.test(code)) {errorCodeRegex()};
+                
+                
+                });
+
+                ok.addEventListener("click", function () {
+                popUp.style.display = "none";
+                codeInput.classList.remove('erro')
+                document.getElementById('cod').value = '';
+                
+                if(!regex.test(quantity)) {errorQuantity()};
+                if(selectValue === 'Tipo') {errorType()};
+                if(!regexCode.test(code)) {errorCodeRegex()};
+
+                
+                });
+                
+            }
+                if (!regex.test(quantity)) {
+                    
+                    errorQuantity();
+                    
+                } else if(selectValue === 'Tipo') {
+    
+                    errorType();
+
+                } else if(!regexCode.test(code)) {
+
+                    errorCodeRegex();
+
+                } else if(code.length < 6) {
+
+                    errorCodeLength();
+
+                }
+                
+                
+                
+                
+                
+                
+                
+                
+                
             }
         })
 

@@ -13,7 +13,7 @@ let downloadButton = document.getElementById("downloadButton");
         let selectType = document.getElementById('type').value;
         let code = document.getElementById('cod').value;
 
-        if(productNameInput !== '' && code !== '' && productQuantityInput !== '' && !productQuantity.classList.contains('erro')) {
+        if(productNameInput !== '' && code !== '' && productQuantityInput !== '' && !productQuantity.classList.contains('erro') && selectType !== 'Tipo') {
 
             ev.preventDefault();
     
@@ -106,14 +106,12 @@ increaseButton.addEventListener("click", () => {
 
 //Mudar cor no select
 const selectElement = document.getElementById("type");
-const types = document.querySelector('.gray');
 
 selectElement.addEventListener("change", function () {
     const selectedOption = selectElement.options[selectElement.selectedIndex];
 
     if (selectedOption.classList.contains("white")) {
         selectElement.style.color = "white";
-        types.style.color = "gray";
     } else {
         selectElement.style.color = "gray"; 
     }
