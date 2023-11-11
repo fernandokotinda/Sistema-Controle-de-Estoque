@@ -7,13 +7,14 @@ let downloadButton = document.getElementById("downloadButton");
     addProduct.addEventListener('click', (ev) => {
 
         let productNameInput = document.getElementById("productName").value;
-        let productQuantityInput = document.getElementById("productQuantity").value;
-        let productQuantity = document.getElementById("productQuantity");
+        let productQuantity = document.getElementById("productQuantity").value;
+        let productQuantityInput = document.getElementById("productQuantity");
         let select = document.getElementById('type');
         let selectType = document.getElementById('type').value;
         let code = document.getElementById('cod').value;
+        let codeInput = document.getElementById('cod');
 
-        if(productNameInput !== '' && code !== '' && productQuantityInput !== '' && !productQuantity.classList.contains('erro') && selectType !== 'Tipo') {
+        if(productNameInput !== '' && code !== '' && productQuantity !== '' && !productQuantityInput.classList.contains('erro') && !codeInput.classList.contains('erro') && selectType !== 'Tipo') {
 
             ev.preventDefault();
     
@@ -28,7 +29,7 @@ let downloadButton = document.getElementById("downloadButton");
     
             let quantity = document.createElement('td');
             quantity.classList.add('quantity');
-            quantity.innerText = productQuantityInput;
+            quantity.innerText = productQuantity;
     
             tr.append(item, quantity)
             

@@ -98,6 +98,7 @@
             
             let name = document.querySelector('#productName').value;
             let quantity = document.querySelector('#productQuantity').value;
+            let quantityInput = document.querySelector('#productQuantity');
             let code = document.getElementById('cod').value;
             let codeInput = document.getElementById('cod');
             let regex = /^[1-9]\d*$/;
@@ -108,7 +109,7 @@
         
             
             
-            if(name !== '' && quantity !== '' && code !== '') {
+            if(name !== '' && quantity !== '' && code !== '' && !quantityInput.classList.contains('erro') && !codeInput.classList.contains('erro')) {
                 
                 ev.preventDefault();
 
@@ -123,9 +124,17 @@
                     productQuantity.classList.remove('erro');
                     document.getElementById('productQuantity').value = '';
 
-                    if(selectValue === 'Tipo') {errorType()};
-                    if(!regexCode.test(code)) {errorCodeRegex()};
-                    if(code.length < 6) {errorCodeLength()};
+                    if(selectValue !== 'Tipo'){select.style.color = 'white'; document.querySelector('#type').value = selectValue};
+                    if(regexCode.test(code)){document.getElementById('cod').value = code};
+                    if(!code.length < 6){document.getElementById('cod').value = code};
+
+                    if(selectValue === 'Tipo') {
+                        errorType();
+                    } else if(code.length < 6) {
+                        errorCodeLength();
+                    } else if(!regexCode.test(code)) {
+                        errorCodeRegex();
+                    }
                     
                     });
     
@@ -133,12 +142,16 @@
                     popUp.style.display = "none";
                     productQuantity.classList.remove('erro');
                     document.getElementById('productQuantity').value = '';
+
+                    if(selectValue !== 'Tipo'){select.style.color = 'white'; document.querySelector('#type').value = selectValue};
+                    if(regexCode.test(code)){document.getElementById('cod').value = code};
+                    if(!code.length < 6){document.getElementById('cod').value = code};
                     
                     if(selectValue === 'Tipo') {
                         errorType();
                     } else if(code.length < 6) {
                         errorCodeLength();
-                    } else {
+                    } else if(!regexCode.test(code)) {
                         errorCodeRegex();
                     }
                     
@@ -158,14 +171,16 @@
                     select.value = 'Tipo';
                     select.style.color = 'gray'
 
-                    if(!regex.test(quantity)) {errorQuantity()};
-                    if(!regexCode.test(code)) {errorCodeRegex()};
-                    if(code.length < 6) {errorCodeLength()};
-
                     if(regex.test(quantity)){document.querySelector('#productQuantity').value = quantity};
-                    // if(regexCode.test(code)){document.getElementById('cod').value = code}
-                    // if(!code.length < 6){document.getElementById('cod').value = code}
-                    
+                    if(regexCode.test(code)){document.getElementById('cod').value = code}
+                    if(!code.length < 6){document.getElementById('cod').value = code}
+
+                    if(code.length < 6) {
+                        errorCodeLength();
+                    } else if(!regexCode.test(code)) {
+                        errorCodeRegex();
+                    }
+            
                     });
     
                     ok.addEventListener("click", function () {
@@ -174,46 +189,18 @@
                     select.value = 'Tipo';
                     select.style.color = 'gray'
 
-                    if(!regex.test(quantity)) {errorQuantity()};
-                    if(!regexCode.test(code)) {errorCodeRegex()};
-                    if(code.length < 6) {errorCodeLength()};
-
                     if(regex.test(quantity)){document.querySelector('#productQuantity').value = quantity};
-                    // if(regexCode.test(code)){document.getElementById('cod').value = code};
-                    // if(!code.length < 6){document.getElementById('cod').value = code};
-                    
+                    if(regexCode.test(code)){document.getElementById('cod').value = code};
+                    if(!code.length < 6){document.getElementById('cod').value = code};
+
+                    if(code.length < 6) {
+                        errorCodeLength();
+                    } else if(!regexCode.test(code)) {
+                        errorCodeRegex();
+                    }
+
                 });
                 
-            }
-            
-            function errorCodeRegex() {
-
-                message.textContent = "O código deve conter apenas números inteiros maiores que 0.";
-                codeInput.classList.add('erro')
-                popUp.style.display = "block";
-
-                exitPopUp.addEventListener("click", function () {
-                popUp.style.display = "none";
-                codeInput.classList.remove('erro')
-                document.getElementById('cod').value = '';
-
-                if(!regex.test(quantity)) {errorQuantity()};
-                if(selectValue === 'Tipo') {errorType()};
-                if(code.length < 6) {errorCodeLength()};
-                
-                });
-
-                ok.addEventListener("click", function () {
-                popUp.style.display = "none";
-                codeInput.classList.remove('erro')
-                document.getElementById('cod').value = '';
-
-                if(!regex.test(quantity)) {errorQuantity()};
-                if(selectValue === 'Tipo') {errorType()};
-                if(code.length < 6) {errorCodeLength()};
-                
-                });
-            
             }
             
             function errorCodeLength() {
@@ -227,10 +214,10 @@
                 codeInput.classList.remove('erro')
                 document.getElementById('cod').value = '';
 
-                if(!regex.test(quantity)) {errorQuantity()};
-                if(selectValue === 'Tipo') {errorType()};
-                if(!regexCode.test(code)) {errorCodeRegex()};
+                if(selectValue !== 'Tipo'){select.style.color = 'white'; document.querySelector('#type').value = selectValue};
+                if(regex.test(quantity)){document.querySelector('#productQuantity').value = quantity};
                 
+                if(!regexCode.test(code)) {errorCodeRegex()};
                 
                 });
 
@@ -238,15 +225,44 @@
                 popUp.style.display = "none";
                 codeInput.classList.remove('erro')
                 document.getElementById('cod').value = '';
-                
-                if(!regex.test(quantity)) {errorQuantity()};
-                if(selectValue === 'Tipo') {errorType()};
-                if(!regexCode.test(code)) {errorCodeRegex()};
 
+                if(selectValue !== 'Tipo'){select.style.color = 'white'; document.querySelector('#type').value = selectValue};
+                if(regex.test(quantity)){document.querySelector('#productQuantity').value = quantity};
+
+                if(!regexCode.test(code)) {errorCodeRegex()};
                 
                 });
                 
             }
+
+            function errorCodeRegex() {
+
+                message.textContent = "O código deve conter apenas números inteiros maiores que 0.";
+                codeInput.classList.add('erro')
+                popUp.style.display = "block";
+
+                exitPopUp.addEventListener("click", function () {
+                popUp.style.display = "none";
+                codeInput.classList.remove('erro')
+                document.getElementById('cod').value = '';
+                
+                if(selectValue !== 'Tipo'){select.style.color = 'white'; document.querySelector('#type').value = selectValue};
+                if(regex.test(quantity)){document.querySelector('#productQuantity').value = quantity};
+                
+                });
+
+                ok.addEventListener("click", function () {
+                popUp.style.display = "none";
+                codeInput.classList.remove('erro')
+                document.getElementById('cod').value = '';
+
+                if(selectValue !== 'Tipo'){select.style.color = 'white'; document.querySelector('#type').value = selectValue};
+                if(regex.test(quantity)){document.querySelector('#productQuantity').value = quantity};
+
+                });
+            
+            }
+            
                 if (!regex.test(quantity)) {
                     
                     errorQuantity();
@@ -255,23 +271,15 @@
     
                     errorType();
 
-                } else if(!regexCode.test(code)) {
-
-                    errorCodeRegex();
-
                 } else if(code.length < 6) {
 
                     errorCodeLength();
 
+                } else if(!regexCode.test(code)) {
+
+                    errorCodeRegex();
+
                 }
-                
-                
-                
-                
-                
-                
-                
-                
                 
             }
         })
