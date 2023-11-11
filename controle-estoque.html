@@ -135,15 +135,11 @@
                     document.getElementById('productQuantity').value = '';
                     
                     if(selectValue === 'Tipo') {
-                        errorType()
-                        if(!regexCode.test(code)) {
-                            errorCodeRegex()
-                            if(code.length < 6) {errorCodeLength()};
-                        };
-
-                    } else if(!regexCode.test(code)) {
-
-
+                        errorType();
+                    } else if(code.length < 6) {
+                        errorCodeLength();
+                    } else {
+                        errorCodeRegex();
                     }
                     
                     });
