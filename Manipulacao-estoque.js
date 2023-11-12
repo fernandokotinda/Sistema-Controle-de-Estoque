@@ -198,7 +198,7 @@ addProduct.addEventListener('click', (ev) => {
 function cancelar() {
     
     popUpConfirmation.style.display = "none";
-    
+
     document.getElementById('productName').value = '';
     document.getElementById('productQuantity').value = '';
     document.getElementById('type').value = 'Tipo';
@@ -219,6 +219,7 @@ function adicionar() {
     let addProduct = document.getElementById("addProduct");
     let tbody = document.querySelector('.estoque-dados');
 
+    
     popUpConfirmation.style.display = 'none'
     
         if (document.querySelectorAll('#estoque tbody tr').length === 0) {
