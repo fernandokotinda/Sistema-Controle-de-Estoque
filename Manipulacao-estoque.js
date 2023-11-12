@@ -17,7 +17,10 @@ let downloadButton = document.getElementById("downloadButton");
 let popUp = document.getElementById("popUp");
 let exitPopUp = document.getElementById("fecharPopUp");
 let message = document.querySelector(".popUpMessage");
+let messageConfirmation = document.querySelector('.popUpMessageConfirmation');
 let ok = document.querySelector("#ok");
+let popUpConfirmation = document.querySelector('#popUpConfirmation');
+
 
 
 addProduct.addEventListener('click', (ev) => {
@@ -155,7 +158,7 @@ addProduct.addEventListener('click', (ev) => {
             } else if (selectValue === 'Tipo') {
                 
                 errorType();
-
+                
             } else if (code.length < 6) {
                 
                 errorCodeLength();
@@ -165,81 +168,134 @@ addProduct.addEventListener('click', (ev) => {
                 errorCodeRegex();
                 
             }
-
+            
             //Adicionando tabela
             if(regex.test(productQuantity) && selectValue !== 'Tipo' && !(code.length < 6) && regexCode.test(code)) {
+                
+                let sim = document.querySelector('#sim');
+                let nao = document.querySelector('#nao');
+                let exitPopUpConfirmation = document.querySelector('#fecharPopUpConfirmation');
+                
+                popUpConfirmation.style.display = 'block';
+                messageConfirmation.innerHTML = `Tem certeza que deseja adicionar este produto: <br> <br>
+                <font color = '#9aaed9'><strong>Nome do produto:</strong></font>  ${name} <br>
+                <font color = '#9aaed9'><strong>Quantidade:</strong></font>  ${productQuantity} <br>
+                <font color = '#9aaed9'><strong>Tipo:</strong></font>  ${selectValue} <br>
+                <font color = '#9aaed9'><strong>Código:</strong></font>  ${code} <br>`
+                
+                
+                sim.addEventListener('click', function () {adicionar()});
 
-                
-                if (document.querySelectorAll('#estoque tbody tr').length === 0) {
+                exitPopUpConfirmation.addEventListener('click', () => {cancelar()});
+        
+                nao.addEventListener('click', () => { cancelar()});
 
-                    function createTable() {
+            }    
+        }  
+    });
 
-                        let theadStock = document.querySelector('#estoque thead');
-                        let trThead = document.createElement('tr');
-                        theadStock.append(trThead);
+//NÃO   
+function cancelar() {
+    
+    popUpConfirmation.style.display = "none";
+    
+    document.getElementById('productName').value = '';
+    document.getElementById('productQuantity').value = '';
+    document.getElementById('type').value = 'Tipo';
+    document.getElementById('type').style.color = 'gray'
+    document.getElementById('cod').value = '';
+    
+    nameInput.focus();
+    
+}
 
-                        let produto = document.createElement('th');
-                        produto.setAttribute('scope', 'col');
-                        produto.innerText = 'Produto'
+//SIM
+function adicionar() {
+    let name = document.querySelector('#productName').value;
+    let nameInput = document.querySelector('#productName');
+    let productQuantity = document.querySelector('#productQuantity').value;
+    let selectValue = document.querySelector('#type').value;
+    let code = document.getElementById('cod').value;
+    let addProduct = document.getElementById("addProduct");
+    let tbody = document.querySelector('.estoque-dados');
 
-                        let quantidade = document.createElement('th');
-                        quantidade.setAttribute('scope', 'col');
-                        quantidade.innerText = 'Quantidade'
-
-                        let tipoProduto = document.createElement('th');
-                        tipoProduto.setAttribute('scope', 'col');
-                        tipoProduto.innerText = 'Tipo';
-                        
-                        let codigoProduto = document.createElement('th');
-                        codigoProduto.setAttribute('scope', 'col');
-                        codigoProduto.innerText = 'Código';
-                        
-                        trThead.append(produto, quantidade, tipoProduto, codigoProduto)
-                        
-                    }
-                    createTable();
-                    
-                }
+    popUpConfirmation.style.display = 'none'
+    
+        if (document.querySelectorAll('#estoque tbody tr').length === 0) {
+    
+            function createTable() {
                 
-                let tbody = document.querySelector('.estoque-dados');
+                let theadStock = document.querySelector('#estoque thead');
+                let trThead = document.createElement('tr');
+                theadStock.append(trThead);
                 
-                let tr = document.createElement('tr');
-                tbody.appendChild(tr);
-
-                let item = document.createElement('td');
-                item.classList.add('item');
-                item.innerText = name;
+                let produto = document.createElement('th');
+                produto.setAttribute('scope', 'col');
+                produto.innerText = 'Produto'
                 
-                let quantity = document.createElement('td');
-                quantity.classList.add('quantity');
-                quantity.innerText = productQuantity;
+                let quantidade = document.createElement('th');
+                quantidade.setAttribute('scope', 'col');
+                quantidade.innerText = 'Quantidade'
                 
-                let type = document.createElement('td');
-                type.classList.add('tipo')
-                type.innerText = selectValue;
+                let tipoProduto = document.createElement('th');
+                tipoProduto.setAttribute('scope', 'col');
+                tipoProduto.innerText = 'Tipo';
                 
-                let codigo = document.createElement('td');
-                codigo.classList.add('codigo');
-                codigo.innerText = code;
+                let codigoProduto = document.createElement('th');
+                codigoProduto.setAttribute('scope', 'col');
+                codigoProduto.innerText = 'Código';
                 
-                tr.append(item, quantity, type, codigo)
+                trThead.append(produto, quantidade, tipoProduto, codigoProduto)
                 
-                togglePopUpTable();
-                
-                document.getElementById('productName').value = '';
-                document.getElementById('productQuantity').value = '';
-                document.getElementById('type').value = 'Tipo';
-                select.style.color = 'gray'
-                document.getElementById('cod').value = '';
-                
-                nameInput.focus();
-                
-
-
             }
+            createTable();
         }
         
-    });
+        let tr = document.createElement('tr');
+        tr.classList.add(name);
+        tbody.appendChild(tr);
+        
+        let item = document.createElement('td');
+        item.classList.add('item');
+        item.innerText = name;
+        
+        let quantity = document.createElement('td');
+        quantity.classList.add('quantity');
+        quantity.innerText = productQuantity;
+        
+        let type = document.createElement('td');
+        type.classList.add('tipo')
+        type.innerText = selectValue;
+        
+        let codigo = document.createElement('td');
+        codigo.classList.add('codigo');
+        codigo.innerText = code;
+        
+        tr.append(item, quantity, type, codigo)
+        
+        togglePopUpTable();
+        
+        
+        document.getElementById('productName').value = '';
+        document.getElementById('productQuantity').value = '';
+        document.getElementById('type').value = 'Tipo';
+        document.getElementById('type').style.color = 'gray'
+        document.getElementById('cod').value = '';
+        
+        
+        addProduct.disabled = true;
+        const originalText = addProduct.innerHTML; 
+        
+        addProduct.innerHTML = "Produto adicionado! ✔";
+        
+        setTimeout(function () {
+            addProduct.disabled = false;
+            addProduct.innerHTML = originalText; 
+        }, 1800); 
+        
+        nameInput.focus();
+    
+}
 
 //Escolher Tabela
 let seeStockTable = document.querySelector('.stock');
@@ -275,16 +331,21 @@ function togglePopUpTable() {
     let retiredTableRows = document.querySelectorAll('#retirada tbody tr');
     let popUpTable = document.getElementById("popUpTable");
     let messageTable = document.querySelector('.popUpMessageTable');
+    let tabelaOverflow = document.querySelector('.tabela');
 
     // Verifica se ambas as tabelas estão vazias
     if (stockTableRows.length === 0) {
 
         popUpTable.style.display = 'block';
         messageTable.textContent = 'Nenhum produto foi adicionado ao estoque!';
+        tabelaOverflow.style.overflowY = 'hidden';
+        tabelaOverflow.style.boxShadow = 'none';
 
     } else {
 
         popUpTable.style.display = 'none';
+        tabelaOverflow.style.overflowY = 'auto';
+        tabelaOverflow.style.boxShadow = 'rgba(255, 255, 255, 0.332) 3px 3px 20px 0px';
 
     }
 
@@ -292,6 +353,9 @@ function togglePopUpTable() {
 
         popUpTable.style.display = 'block';
         messageTable.textContent = 'Nenhum produto foi retirado do estoque!';
+        tabelaOverflow.style.overflowY = 'hidden';
+        tabelaOverflow.style.boxShadow = 'none';
+
     }
 }
 

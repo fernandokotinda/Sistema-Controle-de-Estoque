@@ -28,7 +28,7 @@
                 <span class="choose-sheet stock selected">Tabela de itens em estoque</span>
                 <span class="choose-sheet retired">Tabela de itens retirados do estoque</span>
             </div>
-            <div class="tabela">
+            <div class="tabela" style="overflow-y: hidden;">
                 <table id="estoque">
                     <thead></thead>
                     <tbody class="estoque-dados"></tbody>
@@ -86,6 +86,20 @@
             </div>
             <p class="popUpMessage">Produto adicionado com sucesso!&#10004</p>
             <button type="button" id="ok">OK</button>
+        </div>
+    </div>
+
+    <div id="popUpConfirmation" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="head-popUp">
+                <span class="alerta"><img src="imgs/alerta.png" alt="alerta"></span>
+                <span class="fechar" id="fecharPopUpConfirmation">&times;</span>
+            </div>
+            <p class="popUpMessageConfirmation"></p>
+            <div class="confirmacao">
+                <button type="button" id="sim">SIM</button>
+                <button type="button" id="nao">NÃO</button>
+            </div>
         </div>
     </div>
 
