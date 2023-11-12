@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Dosis&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend&family=Onest:wght@300&display=swap');
 
 *{
     margin: 0%;
@@ -16,6 +17,7 @@ html, body {
     width: 100vw;
     height: 100vh;
     margin: 0;
+    
 
 }
 #header {
@@ -81,6 +83,7 @@ html, body {
     margin: auto;
     width: 400px;
     height: auto;
+    border: 2px solid black;
     border-radius: 30px;
     background-color: #353c4cbb;
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(255, 255, 255, 0.07) 0px 32px 64px;
@@ -168,6 +171,46 @@ button:active{
     height: 100%;
     background-color: transparent;
     z-index: 1;
+}
+.modalTable {
+    
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 1;
+}
+.modal-contentTable {
+    
+    display: flex;
+    flex-direction: column;
+    padding: 0px 20px;
+    background-color: rgb(42, 42, 86);
+    margin: 50px auto;
+    width: 100%;
+    gap: 20px;
+    height: auto;
+    text-align: center;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    border: none;
+    color: #fff;
+    border-radius: 20px;
+    transition: 0.5s;
+    font-family: 'Dosis', sans-serif;
+    font-size: 22px;
+    border: 2px solid black;
+    box-shadow: rgba(0, 0, 0, 0.563) 1px 2px 8px;
+}
+.modal-contentTable .alerta{
+
+    text-align: start;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 16px;
+}
+.modal-contentTable .popUpMessageTable {
+
+    padding: 10px 20px 65px;
 }
 
 .modal-content {
@@ -269,6 +312,7 @@ input[type="text"]::-webkit-outer-spin-button {
     color: gray;
 }
 .retirada{
+
     text-decoration: none;
     color: white;
     font-family: 'Dosis', sans-serif;
@@ -304,4 +348,99 @@ input[type="text"]::-webkit-outer-spin-button {
     width: 30px;
     height: 30px;
 }
+.main {
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+.campo-tabela {
+
+    flex-grow: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border-right: 3.5px solid rgb(0, 0, 0);
+    height: 570px
+}
+.campo-form {
+
+    flex-grow: 2;
+}
+.header-tabela {
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    
+}
+.tabela table {
+    
+    margin: auto;
+}
+.choose-sheet {
+
+    width: 250px;
+    text-align: center;
+    font-family: 'Dosis', sans-serif;
+    font-size: 21px;
+    color: rgb(183, 183, 183);
+    padding: 20px;
+    cursor: pointer;
+    margin-bottom: 25px;
+
+}
+table {
+
+    color: black;
+    font-family: 'Onest', sans-serif;
+    Border-collapse: collapse;
+    /* overflow-x: auto;  */
+}
+thead th {
+    
+    font-weight: bold;
+    vertical-align: middle;
+    position: sticky;
+    font-size: 17px;
+    top: -1px;
+    padding: 15px;
+    color: white;
+    background-color: #444E62;
+    border: 2px solid black;
+
+}
+tbody td {
+
+    vertical-align: middle;
+    text-align: center;
+    color: black;
+    border: 2px solid black;
+    padding: 15px;
+    
+}
+tbody tr {
+    
+    background-color: rgba(245, 245, 245, 0.693);
+
+}
+tbody tr:nth-child(2n) {
+
+    background-color: #e4e4e4;
+}
+.selected {
+
+    color: #f98f26;
+    transform: scale(1.1);
+    transition: 0.2s;
+    border-bottom: 2px solid #f98f26;
+
+}
+/* .stock:hover, .retired:hover{
+
+    color: #6c7a96;
+} */
+
 

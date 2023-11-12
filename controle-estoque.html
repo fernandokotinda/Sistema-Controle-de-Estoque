@@ -16,36 +16,66 @@
     <div id="header">
         <img src="imgs/logo-pagina.png" alt="Logo">
         <h1>Controle de Estoque Administrador</h1>
-        <a target="_blank"href="Pagina-de-retirada.html"><button class="btn-top" type="button">Retirar do estoque<img src="imgs/seta-direita.png" alt="Seta para Direita"></button></a>
+        <a target="_blank" href="Pagina-de-retirada.html"><button class="btn-top" type="button">Retirar do estoque<img
+                    src="imgs/seta-direita.png" alt="Seta para Direita"></button></a>
     </div>
 </header>
+
 <body>
-    <div class="container">
-        <form>
-                <div class="form">
-                <h2>Adicionar item ao estoque</h2>
-                <input type="text" id="productName" placeholder="Nome do Produto" required autocomplete="off">
-                <div class="input-wrapper">
-                    <button type="button" class="increase">+</button>
-                    <input type="text" id="productQuantity" placeholder="Quantidade" required autocomplete="off">
-                    <button  type="button" class="decrease">-</button>
+    <div class="main">
+        <div class="campo-tabela">
+            <div class="header-tabela">
+                <span class="choose-sheet stock selected">Tabela de itens em estoque</span>
+                <span class="choose-sheet retired">Tabela de itens retirados do estoque</span>
+            </div>
+            <div class="tabela">
+                <table id="estoque">
+                    <thead></thead>
+                    <tbody class="estoque-dados"></tbody>
+                </table>
+        
+                <table id="retirada" style="display: none;">
+                    <thead></thead>
+                    <tbody class="retirada-dados"></tbody>
+                </table>
+
+                <div id="popUpTable" class="modalTable">
+                    <div class="modal-contentTable">
+                        <span class="alerta"><img src="imgs/alerta.png" alt="alerta"></span>
+                        <p class="popUpMessageTable">Nenhum produto foi adicionado ao estoque!</p>
+                    </div>
                 </div>
-                <div class="code">
-                   <select name="tipo" id="type">
-                    <option class="gray" value="Tipo" disable selected hidden>Tipo</option>
-                    <option class="white" value="PST">PST</option>
-                    <option class="white" value="BMD">BMD</option>
-                    <option class="white" value="MAC">MAC</option>
-                    <option class="white" value="MAM">MAM</option>
-                    <option class="white" value="DPS">DPS</option>
-                   </select>
-                    <input type="text" id="cod" placeholder="Código" required autocomplete="off" minlength="6" maxlength="6">
+            </div>
+        </div>
+        <div class="campo-form">
+            <div class="container">
+                <form>
+                    <div class="form">
+                        <h2>Adicionar item ao estoque</h2>
+                        <input type="text" id="productName" placeholder="Nome do Produto" required autocomplete="off">
+                        <div class="input-wrapper">
+                            <button type="button" class="increase">+</button>
+                            <input type="text" id="productQuantity" placeholder="Quantidade" required autocomplete="off">
+                            <button type="button" class="decrease">-</button>
+                        </div>
+                        <div class="code">
+                            <select name="tipo" id="type">
+                                <option class="gray" value="Tipo" disable selected hidden>Tipo</option>
+                                <option class="white" value="PST">PST</option>
+                                <option class="white" value="BMD">BMD</option>
+                                <option class="white" value="MAC">MAC</option>
+                                <option class="white" value="MAM">MAM</option>
+                                <option class="white" value="DPS">DPS</option>
+                            </select>
+                            <input type="text" id="cod" placeholder="Código" required autocomplete="off" minlength="6"maxlength="6">
+                        </div>
+                        <button type="submit" id="addProduct">Adicionar ao Estoque</button>
+                        <button type="button" id="downloadButton">Download Excel <img src="imgs/download-direto.png" alt="download"></button>
+                        <a class="retirada" target="_blank" href="Pagina-de-retirada.html">Retirar produto do estoque</a>
+                    </div>
                 </form>
-                </div>
-                <button type="submit" id="addProduct">Adicionar ao Estoque</button>
-                <button type="button" id="downloadButton">Download Excel <img src="imgs/download-direto.png" alt="download"></button>
-                <a class="retirada" target="_blank" href="Pagina-de-retirada.html">Retirar produto do estoque</a>
-                </div>
+            </div>
+        </div>
     </div>
 
     <div id="popUp" class="modal">
@@ -59,233 +89,19 @@
         </div>
     </div>
 
-    <table id="estoque1">
-        <tr>
-            <td>Produto</td>
-            <td>Quantidade</td>
-        </tr>
-    </table>
 
-    <table id="estoque2">
-        <tr>
-            <td>Produto</td>
-            <td>Quantidade</td>
-        </tr>
-    </table>
-    
+
     <script>
-    $('#downloadButton').click(function () {
-        $("#estoque1").table2excel({
-            filename: "Estoque.xls",
-            sheetName: "Estoque1" 
+        $('#downloadButton').click(function () {
+            $("#estoque").table2excel({
+                filename: "Produtos em estoque.xls",
+                sheetName: "Estoque"
+            });
+
         });
-        
-    });
-    
     </script>
 
-    <script>
-        let clickAddProduct = document.querySelector('#addProduct');
-        let popUp = document.getElementById("popUp");
-        let exitPopUp = document.getElementById("fecharPopUp");
-        let message = document.querySelector(".popUpMessage");
-        let ok = document.querySelector("#ok");
 
-        
-        
-        
-        clickAddProduct.addEventListener('click', (ev) => {
-            
-            let name = document.querySelector('#productName').value;
-            let quantity = document.querySelector('#productQuantity').value;
-            let quantityInput = document.querySelector('#productQuantity');
-            let code = document.getElementById('cod').value;
-            let codeInput = document.getElementById('cod');
-            let regex = /^[1-9]\d*$/;
-            let regexCode = /^[0-9]\d*$/;
-
-            let select = document.getElementById('type');
-            let selectValue = document.querySelector('#type').value;
-        
-            
-            
-            if(name !== '' && quantity !== '' && code !== '' && !quantityInput.classList.contains('erro') && !codeInput.classList.contains('erro')) {
-                
-                ev.preventDefault();
-
-                function errorQuantity() {
-
-                    message.textContent = "Digite apenas números inteiros maiores que 0.";
-                    productQuantity.classList.add('erro');
-                    popUp.style.display = "block";
-    
-                    exitPopUp.addEventListener("click", function () {
-                    popUp.style.display = "none";
-                    productQuantity.classList.remove('erro');
-                    document.getElementById('productQuantity').value = '';
-
-                    if(selectValue !== 'Tipo'){select.style.color = 'white'; document.querySelector('#type').value = selectValue};
-                    if(regexCode.test(code)){document.getElementById('cod').value = code};
-                    if(!code.length < 6){document.getElementById('cod').value = code};
-
-                    if(selectValue === 'Tipo') {
-                        errorType();
-                    } else if(code.length < 6) {
-                        errorCodeLength();
-                    } else if(!regexCode.test(code)) {
-                        errorCodeRegex();
-                    }
-                    
-                    });
-    
-                    ok.addEventListener("click", function () {
-                    popUp.style.display = "none";
-                    productQuantity.classList.remove('erro');
-                    document.getElementById('productQuantity').value = '';
-
-                    if(selectValue !== 'Tipo'){select.style.color = 'white'; document.querySelector('#type').value = selectValue};
-                    if(regexCode.test(code)){document.getElementById('cod').value = code};
-                    if(!code.length < 6){document.getElementById('cod').value = code};
-                    
-                    if(selectValue === 'Tipo') {
-                        errorType();
-                    } else if(code.length < 6) {
-                        errorCodeLength();
-                    } else if(!regexCode.test(code)) {
-                        errorCodeRegex();
-                    }
-                    
-                    });
-
-                }
-                
-                function errorType() {
-        
-                    message.textContent = "Por favor, Escolha qual o tipo do Produto.";
-                    select.classList.add('erro');
-                    popUp.style.display = "block";
-    
-                    exitPopUp.addEventListener("click", function () {
-                    popUp.style.display = "none";
-                    select.classList.remove('erro');
-                    select.value = 'Tipo';
-                    select.style.color = 'gray'
-
-                    if(regex.test(quantity)){document.querySelector('#productQuantity').value = quantity};
-                    if(regexCode.test(code)){document.getElementById('cod').value = code}
-                    if(!code.length < 6){document.getElementById('cod').value = code}
-
-                    if(code.length < 6) {
-                        errorCodeLength();
-                    } else if(!regexCode.test(code)) {
-                        errorCodeRegex();
-                    }
-            
-                    });
-    
-                    ok.addEventListener("click", function () {
-                    popUp.style.display = "none";
-                    select.classList.remove('erro')
-                    select.value = 'Tipo';
-                    select.style.color = 'gray'
-
-                    if(regex.test(quantity)){document.querySelector('#productQuantity').value = quantity};
-                    if(regexCode.test(code)){document.getElementById('cod').value = code};
-                    if(!code.length < 6){document.getElementById('cod').value = code};
-
-                    if(code.length < 6) {
-                        errorCodeLength();
-                    } else if(!regexCode.test(code)) {
-                        errorCodeRegex();
-                    }
-
-                });
-                
-            }
-            
-            function errorCodeLength() {
-
-                message.textContent = "O código deve conter exatos 6 números.";
-                codeInput.classList.add('erro')
-                popUp.style.display = "block";
-
-                exitPopUp.addEventListener("click", function () {
-                popUp.style.display = "none";
-                codeInput.classList.remove('erro')
-                document.getElementById('cod').value = '';
-
-                if(selectValue !== 'Tipo'){select.style.color = 'white'; document.querySelector('#type').value = selectValue};
-                if(regex.test(quantity)){document.querySelector('#productQuantity').value = quantity};
-                
-                if(!regexCode.test(code)) {errorCodeRegex()};
-                
-                });
-
-                ok.addEventListener("click", function () {
-                popUp.style.display = "none";
-                codeInput.classList.remove('erro')
-                document.getElementById('cod').value = '';
-
-                if(selectValue !== 'Tipo'){select.style.color = 'white'; document.querySelector('#type').value = selectValue};
-                if(regex.test(quantity)){document.querySelector('#productQuantity').value = quantity};
-
-                if(!regexCode.test(code)) {errorCodeRegex()};
-                
-                });
-                
-            }
-
-            function errorCodeRegex() {
-
-                message.textContent = "O código deve conter apenas números inteiros maiores que 0.";
-                codeInput.classList.add('erro')
-                popUp.style.display = "block";
-
-                exitPopUp.addEventListener("click", function () {
-                popUp.style.display = "none";
-                codeInput.classList.remove('erro')
-                document.getElementById('cod').value = '';
-                
-                if(selectValue !== 'Tipo'){select.style.color = 'white'; document.querySelector('#type').value = selectValue};
-                if(regex.test(quantity)){document.querySelector('#productQuantity').value = quantity};
-                
-                });
-
-                ok.addEventListener("click", function () {
-                popUp.style.display = "none";
-                codeInput.classList.remove('erro')
-                document.getElementById('cod').value = '';
-
-                if(selectValue !== 'Tipo'){select.style.color = 'white'; document.querySelector('#type').value = selectValue};
-                if(regex.test(quantity)){document.querySelector('#productQuantity').value = quantity};
-
-                });
-            
-            }
-            
-                if (!regex.test(quantity)) {
-                    
-                    errorQuantity();
-                    
-                } else if(selectValue === 'Tipo') {
-    
-                    errorType();
-
-                } else if(code.length < 6) {
-
-                    errorCodeLength();
-
-                } else if(!regexCode.test(code)) {
-
-                    errorCodeRegex();
-
-                }
-                
-            }
-        })
-
-    </script>
-        
 
     <script src="Manipulacao-estoque.js"></script>
 </body>
