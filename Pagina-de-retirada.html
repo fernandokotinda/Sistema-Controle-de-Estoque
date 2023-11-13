@@ -1,22 +1,125 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/style-estoque.css">
     <link rel="stylesheet" href="CSS/style-retirada.css">
-    <title>Página de Retirada</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <link rel="shortcut icon" href="imgs/logo sea.png" type="image/x-icon">
+    <title>Retirar item do estoque</title>
 </head>
+
+<header>
+    <div id="header">
+        <img src="imgs/logo-pagina.png" alt="Logo">
+        <h1>Controle de Estoque Administrador</h1>
+        <a target="_blank" href="controle-estoque.html"><button class="btn-top" type="button">Adicionar ao estoque<img
+                    src="imgs/seta-direita.png" alt="Seta para Direita"></button></a>
+    </div>
+</header>
+
 <body>
-    <div class="container">
-        <div class="form-container">
-            <h1>Formulário de Retirada</h1>
-            <form id="withdrawForm">
-                <input type="text" id="toolName" placeholder="Nome da ferramenta" autofocus required>
-                <input type="number" id="quantity" placeholder="Quantidade" required>
-                <button type="submit" id="withdrawButton">Retirar</button>
-            </form>
+    <div class="main">
+        <div class="campo-tabela">
+            <div class="header-tabela">
+                <span class="choose-sheet stock">Tabela de itens em estoque</span>
+                <span class="choose-sheet retired selected">Tabela de itens retirados do estoque</span>
+            </div>
+            <div class="tabela" style="overflow-y: hidden;">
+                <table id="estoque">
+                    <thead></thead>
+                    <tbody class="estoque-dados"></tbody>
+                </table>
+        
+                <table id="retirada" style="display: none;" style="overflow-y: hidden;">
+                    <thead></thead>
+                    <tbody class="retirada-dados"></tbody>
+                </table>
+
+                <div id="popUpTable" class="modalTable">
+                    <div class="modal-contentTable">
+                        <span class="alerta"><img src="imgs/alerta.png" alt="alerta"></span>
+                        <p class="popUpMessageTable">Nenhum produto foi adicionado ao estoque!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="campo-form">
+            <div class="container">
+                <form>
+                    <div class="form">
+                        <h2>Retirar item do estoque</h2>
+                        <input type="text" id="productName" placeholder="Nome do Produto" required autocomplete="off">
+                        <div class="input-wrapper">
+                            <button type="button" class="increase">+</button>
+                            <input type="text" id="productQuantity" placeholder="Quantidade" required autocomplete="off">
+                            <button type="button" class="decrease">-</button>
+                        </div>
+                        <div class="code">
+                            <select name="tipo" id="type">
+                                <option class="gray" value="Tipo" disable selected hidden>Tipo</option>
+                                <option class="white" value="PST">PST</option>
+                                <option class="white" value="BMD">BMD</option>
+                                <option class="white" value="MAC">MAC</option>
+                                <option class="white" value="MAM">MAM</option>
+                                <option class="white" value="DPS">DPS</option>
+                            </select>
+                            <input type="text" id="cod" placeholder="Código" required autocomplete="off" minlength="6"maxlength="6">
+                        </div>
+                        <input type="text" id="receiver" placeholder="Destinatário" required autocomplete="off">
+                        <button type="submit" id="removeProduct">Remover do Estoque</button>
+                        <button type="button" id="downloadButton">Download Excel <img src="imgs/download-direto.png" alt="download"></button>
+                        <a class="retirada" target="_blank" href="controle-estoque.html">Adicionar produto ao estoque</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+
+    <div id="popUp" class="modal">
+        <div class="modal-content">
+            <div class="head-popUp">
+                <span class="alerta"><img src="imgs/alerta.png" alt="alerta"></span>
+                <span class="fechar" id="fecharPopUp">&times;</span>
+            </div>
+            <p class="popUpMessage">Produto adicionado com sucesso!&#10004</p>
+            <button type="button" id="ok">OK</button>
+        </div>
+    </div>
+
+    <div id="popUpConfirmation" class="modal blur-effect" style="display: none;">
+        <div class="modal-content">
+            <div class="head-popUp">
+                <span class="alerta"><img src="imgs/alerta.png" alt="alerta"></span>
+                <span class="fechar" id="fecharPopUpConfirmation">&times;</span>
+            </div>
+            <p class="popUpMessageConfirmation"></p>
+            <div class="confirmacao">
+                <button type="button" id="sim">SIM</button>
+                <button type="button" id="nao">NÃO</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        $('#downloadButton').click(function () {
+            $("#estoque").table2excel({
+                filename: "Produtos em estoque.xls",
+                sheetName: "Estoque"
+            });
+
+        });
+    </script>
+
+
+
+    <script src="Manipulacao-estoque.js"></script>
 </body>
+
 </html>
