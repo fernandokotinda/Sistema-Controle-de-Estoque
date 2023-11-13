@@ -5,11 +5,93 @@
     padding: 0%;
     box-sizing: border-box;
 }
+body{
+    background: linear-gradient(170deg, rgba(8, 28, 21, 0.8) 20%, rgba(8, 28, 21, 0.5) 20%, rgba(8, 28, 21, 0.5) 35%, rgba(27, 67, 50, 0.6) 35%, rgba(27, 67, 50, 0.8) 45%, rgba(45, 106, 79, 0.5) 45%, rgba(45, 106, 79, 0.8) 75%, rgba(8, 28, 21, 0.5) 75%), linear-gradient(45deg, rgba(24, 67, 50, 0.8) 0%, rgba(27, 106, 75, 0.8) 50%, rgba(64, 145, 108, 0.8) 50%, rgba(149, 213, 178, 0.8) 100%) #081C15;
+
+}
 .code {
 
     padding-bottom: 0px;
 }
 #removeProduct:hover {
-
     background-color: #657289;
+}
+.modal-contentTable{
+    background-color: #05251a;
+}
+.selected{
+    color: #80ffdb;
+    border-color: #80ffdb;
+}
+.stock:hover, .retired:hover{
+    
+    color: #081C15;
+}
+.selected:hover{
+    color: #80ffdb;
+    border-color: #80ffdb;
+}
+#downloadButton {
+
+    background-color: #176b6b;
+}
+#downloadButton:hover {
+
+    background-color: #1e9393;
+}
+.btn-top{
+    background-color: #176b6b;
+}
+.btn-top:hover {
+
+    background-color: #1e9393;
+}
+.container{
+
+    background-color: #0f3425a4;
+
+}
+button{
+    background-color: #255E46;
+}
+button:hover{
+    background-color:#255E46;
+}
+.input-wrapper button {
+    background-color: #255E46;
+    color: #fff;
+    font-size: 20px;
+    border: none;
+    padding: 7px 10px;
+    cursor: pointer;
+}
+.input-wrapper button:hover {
+
+    background-color: #309168;
+}
+#removeProduct button:hover{
+    background-color: #309168;
+}
+input, select{
+    background-color: #081C15;
+}
+.modal-content {
+    background-color: #05251a;
+}
+#ok {
+    background-color: #05251a;
+    color: white;
+}
+#ok:hover {
+
+    background-color: #309168;
+}
+.retirada{
+
+    color: white;
+}
+.retirada:hover{
+
+    color: #309168;  
+
 }

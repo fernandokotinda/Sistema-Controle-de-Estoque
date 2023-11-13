@@ -188,3 +188,13 @@ function cancelar() {
     
 }
 
+removeProduct.addEventListener('mouseover', () => {
+
+    removeProduct.style.backgroundColor = '#309168'
+})
+
+removeProduct.addEventListener('mouseout', () => {
+
+    removeProduct.style.backgroundColor = '#255E46'
+})
+
