@@ -16,7 +16,7 @@
     <div id="header">
         <img src="imgs/logo-pagina.png" alt="Logo">
         <h1>Controle de Estoque Administrador</h1>
-        <a target="_blank" href="Pagina-de-retirada.html"><button class="btn-top" type="button">Retirar do estoque<img
+        <a href="Pagina-de-retirada.html"><button class="btn-top" type="button">Retirar do estoque<img
                     src="imgs/seta-direita.png" alt="Seta para Direita"></button></a>
     </div>
 </header>
@@ -34,7 +34,7 @@
                     <tbody class="estoque-dados"></tbody>
                 </table>
         
-                <table id="retirada" style="display: none;">
+                <table id="retirada" style="overflow-y: hidden;">
                     <thead></thead>
                     <tbody class="retirada-dados"></tbody>
                 </table>
@@ -71,7 +71,7 @@
                         </div>
                         <button type="submit" id="addProduct">Adicionar ao Estoque</button>
                         <button type="button" id="downloadButton">Download Excel <img src="imgs/download-direto.png" alt="download"></button>
-                        <a class="retirada" target="_blank" href="Pagina-de-retirada.html">Retirar produto do estoque</a>
+                        <a class="retirada" href="Pagina-de-retirada.html">Retirar produto do estoque</a>
                     </div>
                 </form>
             </div>
@@ -116,8 +116,8 @@
     </script>
 
 
-
-    <script src="Manipulacao-estoque.js"></script>
+    <script src="script-estoque.js"></script>
+    <script src="Manipulacao-geral.js"></script>
 </body>
 
 </html>
