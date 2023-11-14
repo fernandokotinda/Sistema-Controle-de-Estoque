@@ -1,6 +1,6 @@
 //Add tabela
 let addProduct = document.getElementById("addProduct");
-let products = [];
+// let products = [];
 
 
 addProduct.addEventListener('click', (ev) => {
@@ -162,19 +162,6 @@ addProduct.addEventListener('click', (ev) => {
                 <font color = '#9aaed9'><strong>Tipo:</strong></font>  ${selectValue} <br>
                 <font color = '#9aaed9'><strong>Código:</strong></font>  ${code} <br>`
 
-                let propProducts = {
-
-                    name: name,
-                    productQuantity: productQuantity,
-                    selectValue: selectValue,
-                    code: code,
-
-                }
-
-                products.push(propProducts);
-                
-                console.log(products)
-
                 
                 let addProduct = document.getElementById("addProduct");
                 addProduct.disabled = true;
@@ -185,16 +172,18 @@ addProduct.addEventListener('click', (ev) => {
                 setTimeout(function () {
                     addProduct.disabled = false;
                     addProduct.innerHTML = originalText; 
-                }, 1700); 
+                }, 2000); 
                 
                 
                 sim.addEventListener('click', function () {adicionar()});
-
+                
                 exitPopUpConfirmation.addEventListener('click', () => {cancelar()});
-        
+                
                 nao.addEventListener('click', () => {cancelar()});
                 
 
+                
+                
             }    
         }  
     });
@@ -210,18 +199,19 @@ function cancelar() {
         addProduct.disabled = true;
         const originalText = 'Adicionar ao Estoque'; 
         
-        addProduct.innerHTML = "Envio de produto cancelado!";
+        addProduct.innerHTML = "Envio do produto cancelado!";
         
         setTimeout(function () {
             addProduct.disabled = false;
             addProduct.innerHTML = originalText; 
-        }, 1800);
+        }, 2000);
 
     document.getElementById('productName').value = '';
     document.getElementById('productQuantity').value = '';
     document.getElementById('type').value = 'Tipo';
     document.getElementById('type').style.color = 'gray'
     document.getElementById('cod').value = '';
+
     
     nameInput.focus();
     
@@ -315,7 +305,6 @@ function adicionar() {
         console.log('');
     }
        
-
 }
 
 

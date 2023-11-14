@@ -28,7 +28,7 @@ function togglePopUpTable() {
     let messageTable = document.querySelector('.popUpMessageTable');
     let tabelaOverflow = document.querySelector('.tabela');
 
-    // Verifica se ambas as tabelas estão vazias
+
     if (stockTableRows.length === 0) {
 
         popUpTable.style.display = 'block';
@@ -50,7 +50,20 @@ function togglePopUpTable() {
         messageTable.textContent = 'Nenhum produto foi retirado do estoque!';
         tabelaOverflow.style.overflowY = 'hidden';
         tabelaOverflow.style.boxShadow = 'none';
+ 
+    } else {
 
+        popUpTable.style.display = 'none';
+        tabelaOverflow.style.overflowY = 'auto';
+        tabelaOverflow.style.boxShadow = 'rgba(255, 255, 255, 0.332) 3px 3px 20px 0px';
+    }
+
+    if(stockTableRows.length === 0 && retiredTable.style.display === 'none') {
+
+        popUpTable.style.display = 'block';
+        messageTable.textContent = 'Nenhum produto foi adicionado ao estoque!';
+        tabelaOverflow.style.overflowY = 'hidden';
+        tabelaOverflow.style.boxShadow = 'none';
     }
 
 }
@@ -124,6 +137,48 @@ increaseButton.addEventListener("click", () => {
     const currentValue = parseInt(inputElement.value) || 0;
     inputElement.value = currentValue + 1;
 });
+
+let products = [];
+function arrayStock() {
+
+    let name = document.querySelector('#productName').value;
+    let productQuantity = document.querySelector('#productQuantity').value;
+    let selectValue = document.querySelector('#type').value;
+    let code = document.getElementById('cod').value;
+
+    let propProducts = {
+
+        name: name,
+        productQuantity: productQuantity,
+        selectValue: selectValue,
+        code: code,
+
+    }
+    products.push(propProducts);
+    console.log(products)
+
+}
+function arrayRetired() {
+
+    let name = document.querySelector('#productName').value;
+    let productQuantity = document.querySelector('#productQuantity').value;
+    let selectValue = document.querySelector('#type').value;
+    let code = document.getElementById('cod').value;
+    let receiver = document.getElementById('receiver').value;
+    
+    let propProducts = {
+    
+        name: name,
+        productQuantity: productQuantity,
+        selectValue: selectValue,
+        code: code,
+        receiver: receiver,
+    
+    }
+    products.push(propProducts);
+    console.log(products)
+
+}
 
 
 
