@@ -200,57 +200,5 @@ removeProduct.addEventListener('mouseout', () => {
 
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Recupera os dados da tabela do localStorage
-    const tabelaData = JSON.parse(localStorage.getItem('tabelaDados'));
-
-    if (tabelaData) {
-        // Adiciona os dados da tabela à tabela na página de retirada
-        const tbody = document.querySelector('.estoque-dados');
-        tabelaData.forEach(item => {
-            const tr = document.createElement('tr');
-            const keys = Object.keys(item);
-
-            keys.forEach(key => {
-                const td = document.createElement('td');
-                td.innerText = item[key];
-                tr.appendChild(td);
-            });
-
-            tbody.appendChild(tr);
-        });
-    };
-    
-});
-if (document.querySelectorAll('#estoque tbody tr').length === 0) {
-
-    function createTable() {
-            
-    let theadStock = document.querySelector('#estoque thead');
-    let trThead = document.createElement('tr');
-    theadStock.append(trThead);
-    
-    let produto = document.createElement('th');
-    produto.setAttribute('scope', 'col');
-    produto.innerText = 'Produto'
-    
-    let quantidade = document.createElement('th');
-    quantidade.setAttribute('scope', 'col');
-    quantidade.innerText = 'Quantidade'
-    
-    let tipoProduto = document.createElement('th');
-    tipoProduto.setAttribute('scope', 'col');
-    tipoProduto.innerText = 'Tipo';
-    
-    let codigoProduto = document.createElement('th');
-    codigoProduto.setAttribute('scope', 'col');
-    codigoProduto.innerText = 'Código';
-    
-    trThead.append(produto, quantidade, tipoProduto, codigoProduto)
-    
-    }
-    createTable();
-}
-
 
 

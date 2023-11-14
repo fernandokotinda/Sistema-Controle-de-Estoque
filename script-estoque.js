@@ -284,20 +284,6 @@ function adicionar() {
         
     
 }
-function obterDadosDaTabela() {
-    const tabelaRows = document.querySelectorAll('#estoque tbody tr');
-    const tabelaData = []; 
 
-tabelaRows.forEach(row => {
-        const item = row.querySelector('.item').innerText;
-        const quantidade = row.querySelector('.quantity').innerText;
-        const tipo = row.querySelector('.tipo').innerText;
-        const codigo = row.querySelector('.codigo').innerText;
-
-        tabelaData.push({ item, quantidade, tipo, codigo });
-    });
-
-    return tabelaData;
-}
 
 

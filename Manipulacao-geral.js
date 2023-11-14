@@ -53,13 +53,6 @@ function togglePopUpTable() {
 
     }
 
-    if(stockTableRows.length === 0 && retiredTableRows.style.display === 'none') {
-
-        popUpTable.style.display = 'block';
-        messageTable.textContent = 'Nenhum produto foi retirado do estoque!';
-        tabelaOverflow.style.overflowY = 'hidden';
-        tabelaOverflow.style.boxShadow = 'none';
-    }
 }
 
 //Escolher Tabela
