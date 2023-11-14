@@ -267,7 +267,10 @@ function adicionar() {
         createTable();
     }
 
+    try{
+
         tbody.innerHTML = ''
+        
         products.forEach((produto) => {
 
             let tr = document.createElement('tr');
@@ -306,6 +309,11 @@ function adicionar() {
        
     
         nameInput.focus();
+
+    } catch {
+
+        console.log('');
+    }
        
 
 }
