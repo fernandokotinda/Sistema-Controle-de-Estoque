@@ -53,7 +53,7 @@ function togglePopUpTable() {
 
     }
 
-    if(stockTableRows.length === 0 && retiredTableRows.style.disabled === 'none') {
+    if(stockTableRows.length === 0 && retiredTableRows.style.display === 'none') {
 
         popUpTable.style.display = 'block';
         messageTable.textContent = 'Nenhum produto foi retirado do estoque!';
@@ -89,7 +89,6 @@ seeRetiredTable.addEventListener('click', () => {
     togglePopUpTable();
     
 })
-
 
 
 
@@ -132,3 +131,7 @@ increaseButton.addEventListener("click", () => {
     const currentValue = parseInt(inputElement.value) || 0;
     inputElement.value = currentValue + 1;
 });
+
+
+
+

@@ -40,16 +40,21 @@ body{
     background-color: #1e9393;
 }
 .btn-top{
-    background-color: #176b6b;
+    background-color: #1E9393;
 }
 .btn-top:hover {
 
-    background-color: #1e9393;
+    background-color: #139a9a;
 }
 .container{
 
     background-color: #0f3425a4;
+    margin-top: 0px;
 
+}
+.header-tabela {
+
+    margin-top: 20px;
 }
 button{
     background-color: #255E46;

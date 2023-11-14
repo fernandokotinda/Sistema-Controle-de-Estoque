@@ -167,6 +167,7 @@ addProduct.addEventListener('click', (ev) => {
                 exitPopUpConfirmation.addEventListener('click', () => {cancelar()});
         
                 nao.addEventListener('click', () => { cancelar()});
+                
 
             }    
         }  
@@ -203,39 +204,39 @@ function adicionar() {
     
     popUpConfirmation.style.display = 'none'
     
-        if (document.querySelectorAll('#estoque tbody tr').length === 0) {
-    
-            function createTable() {
-                
-                let theadStock = document.querySelector('#estoque thead');
-                let trThead = document.createElement('tr');
-                theadStock.append(trThead);
-                
-                let produto = document.createElement('th');
-                produto.setAttribute('scope', 'col');
-                produto.innerText = 'Produto'
-                
-                let quantidade = document.createElement('th');
-                quantidade.setAttribute('scope', 'col');
-                quantidade.innerText = 'Quantidade'
-                
-                let tipoProduto = document.createElement('th');
-                tipoProduto.setAttribute('scope', 'col');
-                tipoProduto.innerText = 'Tipo';
-                
-                let codigoProduto = document.createElement('th');
-                codigoProduto.setAttribute('scope', 'col');
-                codigoProduto.innerText = 'Código';
-                
-                trThead.append(produto, quantidade, tipoProduto, codigoProduto)
-                
-            }
-            createTable();
-        }
+    if (document.querySelectorAll('#estoque tbody tr').length === 0) {
         
-        let tr = document.createElement('tr');
-        tr.classList.add(name);
-        tbody.appendChild(tr);
+        function createTable() {
+            
+            let theadStock = document.querySelector('#estoque thead');
+            let trThead = document.createElement('tr');
+            theadStock.append(trThead);
+            
+            let produto = document.createElement('th');
+            produto.setAttribute('scope', 'col');
+            produto.innerText = 'Produto'
+            
+            let quantidade = document.createElement('th');
+            quantidade.setAttribute('scope', 'col');
+            quantidade.innerText = 'Quantidade'
+            
+            let tipoProduto = document.createElement('th');
+            tipoProduto.setAttribute('scope', 'col');
+            tipoProduto.innerText = 'Tipo';
+            
+            let codigoProduto = document.createElement('th');
+            codigoProduto.setAttribute('scope', 'col');
+            codigoProduto.innerText = 'Código';
+            
+            trThead.append(produto, quantidade, tipoProduto, codigoProduto)
+            
+        }
+        createTable();
+    }
+    
+    let tr = document.createElement('tr');
+    tr.classList.add(name);
+    tbody.appendChild(tr);
         
         let item = document.createElement('td');
         item.classList.add('item');
@@ -274,9 +275,29 @@ function adicionar() {
             addProduct.disabled = false;
             addProduct.innerHTML = originalText; 
         }, 1800); 
+
+        const tabelaData = obterDadosDaTabela();
+
+        localStorage.setItem('tabelaDados', JSON.stringify(tabelaData));
         
         nameInput.focus();
+        
     
+}
+function obterDadosDaTabela() {
+    const tabelaRows = document.querySelectorAll('#estoque tbody tr');
+    const tabelaData = []; 
+
+tabelaRows.forEach(row => {
+        const item = row.querySelector('.item').innerText;
+        const quantidade = row.querySelector('.quantity').innerText;
+        const tipo = row.querySelector('.tipo').innerText;
+        const codigo = row.querySelector('.codigo').innerText;
+
+        tabelaData.push({ item, quantidade, tipo, codigo });
+    });
+
+    return tabelaData;
 }
 
 
