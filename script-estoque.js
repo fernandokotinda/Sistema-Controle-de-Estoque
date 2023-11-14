@@ -1,5 +1,6 @@
 //Add tabela
 let addProduct = document.getElementById("addProduct");
+let products = [];
 
 
 addProduct.addEventListener('click', (ev) => {
@@ -160,13 +161,38 @@ addProduct.addEventListener('click', (ev) => {
                 <font color = '#9aaed9'><strong>Quantidade:</strong></font>  ${productQuantity} <br>
                 <font color = '#9aaed9'><strong>Tipo:</strong></font>  ${selectValue} <br>
                 <font color = '#9aaed9'><strong>Código:</strong></font>  ${code} <br>`
+
+                let propProducts = {
+
+                    name: name,
+                    productQuantity: productQuantity,
+                    selectValue: selectValue,
+                    code: code,
+
+                }
+
+                products.push(propProducts);
+                
+                console.log(products)
+
+                
+                let addProduct = document.getElementById("addProduct");
+                addProduct.disabled = true;
+                const originalText = addProduct.innerHTML; 
+                
+                addProduct.innerHTML = "Produto adicionado! ✔";
+                
+                setTimeout(function () {
+                    addProduct.disabled = false;
+                    addProduct.innerHTML = originalText; 
+                }, 1700); 
                 
                 
                 sim.addEventListener('click', function () {adicionar()});
 
                 exitPopUpConfirmation.addEventListener('click', () => {cancelar()});
         
-                nao.addEventListener('click', () => { cancelar()});
+                nao.addEventListener('click', () => {cancelar()});
                 
 
             }    
@@ -179,6 +205,17 @@ function cancelar() {
     let nameInput = document.querySelector('#productName');
 
     popUpConfirmation.style.display = "none";
+
+    let addProduct = document.getElementById("addProduct");
+        addProduct.disabled = true;
+        const originalText = 'Adicionar ao Estoque'; 
+        
+        addProduct.innerHTML = "Envio de produto cancelado!";
+        
+        setTimeout(function () {
+            addProduct.disabled = false;
+            addProduct.innerHTML = originalText; 
+        }, 1800);
 
     document.getElementById('productName').value = '';
     document.getElementById('productQuantity').value = '';
@@ -193,16 +230,12 @@ function cancelar() {
 //SIM
 function adicionar() {
 
-    let name = document.querySelector('#productName').value;
     let nameInput = document.querySelector('#productName');
-    let productQuantity = document.querySelector('#productQuantity').value;
-    let selectValue = document.querySelector('#type').value;
-    let code = document.getElementById('cod').value;
-    let addProduct = document.getElementById("addProduct");
-    let tbody = document.querySelector('.estoque-dados');
+    let tbody = document.querySelector('.estoque-dados')
 
     
     popUpConfirmation.style.display = 'none'
+    
     
     if (document.querySelectorAll('#estoque tbody tr').length === 0) {
         
@@ -233,31 +266,34 @@ function adicionar() {
         }
         createTable();
     }
+
+        tbody.innerHTML = ''
+        products.forEach((produto) => {
+
+            let tr = document.createElement('tr');
+            tr.classList.add(produto.name);
     
-    let tr = document.createElement('tr');
-    tr.classList.add(name);
-    tbody.appendChild(tr);
-        
-        let item = document.createElement('td');
-        item.classList.add('item');
-        item.innerText = name;
-        
-        let quantity = document.createElement('td');
-        quantity.classList.add('quantity');
-        quantity.innerText = productQuantity;
-        
-        let type = document.createElement('td');
-        type.classList.add('tipo')
-        type.innerText = selectValue;
-        
-        let codigo = document.createElement('td');
-        codigo.classList.add('codigo');
-        codigo.innerText = code;
-        
-        tr.append(item, quantity, type, codigo)
-        
-        togglePopUpTable();
-        
+            tbody.appendChild(tr);
+                
+            let item = document.createElement('td');
+            item.classList.add('item');
+            item.innerText = produto.name;
+            
+            let quantity = document.createElement('td');
+            quantity.classList.add('quantity');
+            quantity.innerText = produto.productQuantity;
+            
+            let type = document.createElement('td');
+            type.classList.add('tipo')
+            type.innerText = produto.selectValue;
+            
+            let codigo = document.createElement('td');
+            codigo.classList.add('codigo');
+            codigo.innerText = produto.code;
+            
+            tr.append(item, quantity, type, codigo)
+
+        })
         
         document.getElementById('productName').value = '';
         document.getElementById('productQuantity').value = '';
@@ -265,25 +301,17 @@ function adicionar() {
         document.getElementById('type').style.color = 'gray'
         document.getElementById('cod').value = '';
         
-        
-        addProduct.disabled = true;
-        const originalText = addProduct.innerHTML; 
-        
-        addProduct.innerHTML = "Produto adicionado! ✔";
-        
-        setTimeout(function () {
-            addProduct.disabled = false;
-            addProduct.innerHTML = originalText; 
-        }, 1800); 
+        togglePopUpTable();
 
-        const tabelaData = obterDadosDaTabela();
-
-        localStorage.setItem('tabelaDados', JSON.stringify(tabelaData));
-        
-        nameInput.focus();
-        
+       
     
+        nameInput.focus();
+       
+
 }
+
+
+
 
 
 
