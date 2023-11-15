@@ -138,7 +138,9 @@ increaseButton.addEventListener("click", () => {
     inputElement.value = currentValue + 1;
 });
 
-let products = [];
+let productsStock = [];
+let productsRetired = [];
+
 function arrayStock() {
 
     let name = document.querySelector('#productName').value;
@@ -146,7 +148,7 @@ function arrayStock() {
     let selectValue = document.querySelector('#type').value;
     let code = document.getElementById('cod').value;
 
-    let propProducts = {
+    let propProductsStock = {
 
         name: name,
         productQuantity: productQuantity,
@@ -154,8 +156,8 @@ function arrayStock() {
         code: code,
 
     }
-    products.push(propProducts);
-    console.log(products)
+    productsStock.push(propProductsStock);
+    console.log(productsStock)
 
 }
 function arrayRetired() {
@@ -166,7 +168,7 @@ function arrayRetired() {
     let code = document.getElementById('cod').value;
     let receiver = document.getElementById('receiver').value;
     
-    let propProducts = {
+    let propProductsRetired = {
     
         name: name,
         productQuantity: productQuantity,
@@ -175,8 +177,8 @@ function arrayRetired() {
         receiver: receiver,
     
     }
-    products.push(propProducts);
-    console.log(products)
+    productsRetired.push(propProductsRetired);
+    console.log(productsRetired)
 
 }
 

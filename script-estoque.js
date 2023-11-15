@@ -1,6 +1,5 @@
 //Add tabela
 let addProduct = document.getElementById("addProduct");
-// let products = [];
 
 
 addProduct.addEventListener('click', (ev) => {
@@ -261,7 +260,7 @@ function adicionar() {
 
         tbody.innerHTML = ''
         
-        products.forEach((produto) => {
+        productsStock.forEach((produto) => {
 
             let tr = document.createElement('tr');
             tr.classList.add(produto.name);
@@ -293,6 +292,8 @@ function adicionar() {
         document.getElementById('type').value = 'Tipo';
         document.getElementById('type').style.color = 'gray'
         document.getElementById('cod').value = '';
+
+        saveToLocalStorage();
         
         togglePopUpTable();
 
@@ -306,6 +307,89 @@ function adicionar() {
     }
        
 }
+
+function saveToLocalStorage(data, key) {
+
+    localStorage.setItem(key, JSON.stringify(data));
+    
+}
+
+// window.onload = function () {
+
+//     let popUpTable = document.getElementById("popUpTable");
+//     popUpTable.style.display = 'none';
+
+//     loadFromLocalStorage();
+
+// }
+
+function updateTable() {
+    const tbody = document.querySelector('.estoque-dados');
+    popUpConfirmation.style.display = 'none';
+
+    if (document.querySelectorAll('#estoque tbody tr').length === 0) {
+        
+        function createTable() {
+            
+            let theadStock = document.querySelector('#estoque thead');
+            let trThead = document.createElement('tr');
+            theadStock.append(trThead);
+            
+            let produto = document.createElement('th');
+            produto.setAttribute('scope', 'col');
+            produto.innerText = 'Produto'
+            
+            let quantidade = document.createElement('th');
+            quantidade.setAttribute('scope', 'col');
+            quantidade.innerText = 'Quantidade'
+            
+            let tipoProduto = document.createElement('th');
+            tipoProduto.setAttribute('scope', 'col');
+            tipoProduto.innerText = 'Tipo';
+            
+            let codigoProduto = document.createElement('th');
+            codigoProduto.setAttribute('scope', 'col');
+            codigoProduto.innerText = 'Código';
+            
+            trThead.append(produto, quantidade, tipoProduto, codigoProduto)
+            
+        }
+        createTable();
+    }
+
+    tbody.innerHTML = '';
+
+    productsStock.forEach((produto) => {
+
+        let tr = document.createElement('tr');
+            tr.classList.add(produto.name);
+    
+            tbody.appendChild(tr);
+                
+            let item = document.createElement('td');
+            item.classList.add('item');
+            item.innerText = produto.name;
+            
+            let quantity = document.createElement('td');
+            quantity.classList.add('quantity');
+            quantity.innerText = produto.productQuantity;
+            
+            let type = document.createElement('td');
+            type.classList.add('tipo')
+            type.innerText = produto.selectValue;
+            
+            let codigo = document.createElement('td');
+            codigo.classList.add('codigo');
+            codigo.innerText = produto.code;
+            
+            tr.append(item, quantity, type, codigo);
+
+            
+    });
+
+    console.log(productsStock);
+}
+
 
 
 
