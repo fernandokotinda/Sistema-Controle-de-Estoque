@@ -326,7 +326,7 @@ function loadFromLocalStorage() {
     const storedProducts = localStorage.getItem('productsStock');
     if (storedProducts) {
         productsStock = JSON.parse(storedProducts);
-        updateTable();
+        updateTableStock();
     }
 }
 
@@ -341,7 +341,7 @@ window.onload = function () {
 }
         
 
-function updateTable() {
+function updateTableStock() {
     
     const tbody = document.querySelector('.estoque-dados');
     popUpConfirmation.style.display = 'none'
@@ -407,15 +407,14 @@ function updateTable() {
             
     });
 
+    saveToLocalStorageBack();
+
     console.log(productsStock)
 }
 
-// function saveToLocalStorage(data, key) {
-//     localStorage.setItem(key, JSON.stringify(data));
-//     const updateEvent = new CustomEvent('dataUpdated', { detail: { key, data } });
-//     window.dispatchEvent(updateEvent);
-// }
-
+function saveToLocalStorage() {
+    localStorage.setItem('productsStock', JSON.stringify(productsStock));
+}
 
 
 

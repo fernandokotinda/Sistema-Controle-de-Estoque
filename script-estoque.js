@@ -297,7 +297,7 @@ function adicionar() {
         
         togglePopUpTable();
 
-       
+       console.log(productsStock)
     
         nameInput.focus();
 
@@ -311,8 +311,23 @@ function adicionar() {
 function saveToLocalStorage() {
     localStorage.setItem('productsStock', JSON.stringify(productsStock));
 }
+function loadFromLocalStorageBack() {
+    const storedProducts = localStorage.getItem('productsStock');
+    if (storedProducts) {
+        productsStock = JSON.parse(storedProducts);
+        adicionar();
+    }
+}
+window.onload = function () {
+    
+    // let tableStock = document.querySelector('#estoque');
+    // tableStock.style.display = 'none';
+    
+    loadFromLocalStorageBack();
 
 
+}
+//localStorage.clear();
 
 
 
