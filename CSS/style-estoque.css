@@ -474,5 +474,11 @@ tbody tr:nth-child(2n) {
 .blur-effect {
     backdrop-filter: blur(5px); 
 }
-
-
+.valvet img {
+    width: 240px;
+    height: 90px;
+    margin-top: 120px;
+}
+.valvet{
+    margin-right: auto;
+}

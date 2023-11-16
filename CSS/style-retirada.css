@@ -100,3 +100,8 @@ input, select{
     color: #309168;  
 
 }
+.valvet img {
+    width: 240px;
+    height: 90px;
+    margin-top: 100px;
+}
