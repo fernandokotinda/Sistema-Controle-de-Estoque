@@ -37,6 +37,8 @@ removeProduct.addEventListener('click', (ev) => {
                 if (selectValue !== 'Tipo') { select.style.color = 'white'; document.querySelector('#type').value = selectValue };
                 if (regexCode.test(code)) { document.getElementById('cod').value = code };
                 if (!code.length < 6) { document.getElementById('cod').value = code };
+                document.getElementById('productName').value = name;
+                document.getElementById('receiver').value = receiver;
                 
                 if (selectValue === 'Tipo') {
                     errorType();
@@ -70,6 +72,8 @@ removeProduct.addEventListener('click', (ev) => {
                 if (regex.test(productQuantity)) { document.querySelector('#productQuantity').value = productQuantity };
                 if (regexCode.test(code)) { document.getElementById('cod').value = code }
                 if (!(code.length < 6)) { document.getElementById('cod').value = code }
+                document.getElementById('productName').value = name;
+                document.getElementById('receiver').value = receiver;
                 
                 if (code.length < 6) {
                     errorCodeLength();
@@ -98,6 +102,8 @@ removeProduct.addEventListener('click', (ev) => {
                 
                 if (selectValue !== 'Tipo') { select.style.color = 'white'; document.querySelector('#type').value = selectValue };
                 if (regex.test(productQuantity)) { document.querySelector('#productQuantity').value = productQuantity };
+                document.getElementById('productName').value = name;
+                document.getElementById('receiver').value = receiver;
                 
                 if (!regexCode.test(code)) { errorCodeRegex() };
                 
@@ -123,6 +129,9 @@ removeProduct.addEventListener('click', (ev) => {
 
                 if (selectValue !== 'Tipo') { select.style.color = 'white'; document.querySelector('#type').value = selectValue };
                 if (regex.test(productQuantity)) { document.querySelector('#productQuantity').value = productQuantity };
+                document.getElementById('productName').value = name;
+                document.getElementById('receiver').value = receiver;
+            
                 
             }
 
@@ -148,6 +157,53 @@ removeProduct.addEventListener('click', (ev) => {
         }
         if(regex.test(productQuantity) && selectValue !== 'Tipo' && !(code.length < 6) && regexCode.test(code)) {
 
+            let name = document.getElementById('productName').value;
+            let productQuantity = document.getElementById('productQuantity').value;
+            let selectValue = document.querySelector('#type').value;
+            let code = document.getElementById('cod').value;
+
+            let isProductInStockEqual = productsStock.some(product => (
+                
+                product.name === name &&
+                product.productQuantity === productQuantity &&
+                product.selectValue === selectValue &&
+                product.code === code
+
+            
+            ));
+  
+            if (!isProductInStockEqual) {
+                let ok = document.querySelector("#ok");
+                let exitPopUp = document.getElementById("fecharPopUp");
+
+                popUp.style.display = 'block';
+                message.innerHTML = 'Não foi encontrado nenhum produto com as informações que você forneceu!'
+                ok.addEventListener('click', () => {limpar()})
+                exitPopUp.addEventListener('click', () => {limpar()})
+            }
+         
+            // let isProductInStockQuantity = productsStock.some(product => (
+                
+            //     product.name === name &&
+            //     product.productQuantity > productQuantity &&
+            //     product.selectValue === selectValue &&
+            //     product.code === code
+
+            
+            // ));
+
+            // if (!isProductInStockQuantity) {
+            //     let ok = document.querySelector("#ok");
+            //     let exitPopUp = document.getElementById("fecharPopUp");
+
+            //     popUp.style.display = 'block';
+            //     message.innerHTML = 'A quantidade que deseja retirar é insuficiente!'
+            //     ok.addEventListener('click', () => {limpar()})
+            //     exitPopUp.addEventListener('click', () => {limpar()})
+            // }
+
+            if(isProductInStockEqual) {
+
                 let sim = document.querySelector('#sim');
                 let nao = document.querySelector('#nao');
                 let exitPopUpConfirmation = document.querySelector('#fecharPopUpConfirmation');
@@ -157,7 +213,8 @@ removeProduct.addEventListener('click', (ev) => {
                 <font color = '#9aaed9'><strong>Nome do produto:</strong></font>  ${name} <br>
                 <font color = '#9aaed9'><strong>Quantidade:</strong></font>  ${productQuantity} <br>
                 <font color = '#9aaed9'><strong>Tipo:</strong></font>  ${selectValue} <br>
-                <font color = '#9aaed9'><strong>Código:</strong></font>  ${code} <br>`
+                <font color = '#9aaed9'><strong>Código:</strong></font>  ${code} <br>
+                <font color = '#9aaed9'><strong>Destinatário:</strong></font> ${receiver} <br>`
     
                 let removeProduct = document.getElementById("removeProduct");
                     removeProduct.disabled = true;
@@ -177,11 +234,29 @@ removeProduct.addEventListener('click', (ev) => {
         
                 nao.addEventListener('click', () => { cancelar()});
                 
+            }
 
         };
     };
 });
+//LIMPAR 
 
+function limpar() {
+
+    let nameInput = document.querySelector('#productName');
+
+    popUp.style.display = "none";
+
+    document.getElementById('productName').value = '';
+    document.getElementById('productQuantity').value = '';
+    document.getElementById('type').value = 'Tipo';
+    document.getElementById('type').style.color = 'gray'
+    document.getElementById('cod').value = '';
+    document.getElementById('receiver').value = ''
+    
+    nameInput.focus();
+
+}
 //NÃO   
 function cancelar() {
 
@@ -212,16 +287,29 @@ function cancelar() {
 }
 
 //SIM
-
 function retirar() {
+
+    let name = document.querySelector('#productName').value;
+    let indexToRemove;
+    popUpConfirmation.style.display = 'none'
+
+    for (let i in productsStock) {
+        if (productsStock[i].name === name) {
+            indexToRemove = i;
+            break;
+        }
+    }
+    productsStock.splice(indexToRemove, 1);
+
+    updateTableStock();
+    AdicionarTableRetired();
+}
+
+function AdicionarTableRetired() {
 
     let nameInput = document.querySelector('#productName');
     let tbody = document.querySelector('.retirada-dados')
 
-    
-    popUpConfirmation.style.display = 'none'
-    
-    
     if (document.querySelectorAll('#retirada tbody tr').length === 0) {
         
         function createTable() {
@@ -412,9 +500,11 @@ function updateTableStock() {
     console.log(productsStock)
 }
 
-function saveToLocalStorage() {
+function saveToLocalStorageBack() {
     localStorage.setItem('productsStock', JSON.stringify(productsStock));
 }
+
+// localStorage.clear();
 
 
 
