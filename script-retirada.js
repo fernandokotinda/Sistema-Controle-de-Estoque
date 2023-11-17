@@ -258,15 +258,15 @@ function cancelar() {
     document.getElementById('cod').value = '';
     document.getElementById('receiver').value = '';
 
-    let addProduct = document.getElementById("addProduct");
-        addProduct.disabled = true;
+    let removeProduct = document.getElementById("removeProduct");
+        removeProduct.disabled = true;
         const originalText = 'Adicionar ao Estoque'; 
         
-        addProduct.innerHTML = "Envio do produto cancelado!";
+        removeProduct.innerHTML = "Envio do produto cancelado!";
         
         setTimeout(function () {
-            addProduct.disabled = false;
-            addProduct.innerHTML = originalText; 
+            removeProduct.disabled = false;
+            removeProduct.innerHTML = originalText; 
         }, 2000);
 
 
@@ -304,11 +304,11 @@ function retirar() {
 
     for (let i in productsStock) {
         if (productsStock[i].name === name) {
-            idToRemove = productsStock[i].id;;
+            idToRemove = productsStock[i].id;
             break;
         }
     }
-    // productsStock.splice(indexToRemove, 1);
+
     productsStock = productsStock.filter(product => product.id !== idToRemove)
 
     

@@ -353,6 +353,11 @@ input[type="text"]::-webkit-outer-spin-button {
 }
 .alerta img {
     margin-top: 20px;
+    width: 35px;
+    height: 35px;
+}
+.excel img {
+    margin-top: 20px;
     width: 30px;
     height: 30px;
 }
@@ -502,6 +507,30 @@ tbody tr:nth-child(2n) {
 .logo-valmet{
     width: 220px;
     height: 90px;
+}
+#stockProduct, #retiredProduct {
+
+    width: 5 0%;
+    height: 20%;
+    padding: 15px;
+    font-size: 18px;
+    background-color: rgba(68, 214, 68, 0.653);
+    border: 2px solid rgb(99, 99, 99);
+    color: black;
+    font-weight: bold;
+    
+}
+#stockProduct:hover, #retiredProduct:hover {
+
+    background-color: rgba(158, 234, 158, 0.653);
+}
+.choose-excel {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 35px;
 }
 
 

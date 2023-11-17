@@ -110,18 +110,19 @@
             </div>
         </div>
     </div>
-
-
-
-    <script>
-        $('#downloadButton').click(function () {
-            $("#estoque").table2excel({
-                filename: "Produtos em estoque.xls",
-                sheetName: "Estoque"
-            });
-
-        });
-    </script>
+    <div id="popUpExcel" class="modal blur-effect" style="display: none;">
+        <div class="modal-content">
+            <div class="head-popUp">
+                <span class="excel"><img src="imgs/excel-icon.png" alt="excel icone"></span>
+                <span class="fechar" id="fecharPopUpExcel">&times;</span>
+            </div>
+            <p class="popUpMessageExcel">Escolha qual planilha deseja baixar:</p>
+            <div class="choose-excel">
+                <button type="button" id="stockProduct" >Produtos em estoque</button>
+                <button type="button" id="retiredProduct" >Produtos retirados do estoque</button>
+            </div>
+        </div>
+    </div>
 
     <script src="Manipulacao-geral.js"></script>
     <script src="script-retirada.js"></script>
