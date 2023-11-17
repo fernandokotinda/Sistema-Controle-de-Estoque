@@ -1,4 +1,5 @@
 //Remover produto da tabela
+
 let removeProduct = document.querySelector('#removeProduct');
 
 removeProduct.addEventListener('click', (ev) => {
@@ -162,25 +163,25 @@ removeProduct.addEventListener('click', (ev) => {
             let selectValue = document.querySelector('#type').value;
             let code = document.getElementById('cod').value;
 
-            let isProductInStockEqual = productsStock.some(product => (
+            // let isProductInStockEqual = productsStock.some(product => (
                 
-                product.name === name &&
-                product.productQuantity === productQuantity &&
-                product.selectValue === selectValue &&
-                product.code === code
+            //     product.name === name &&
+            //     product.productQuantity === productQuantity &&
+            //     product.selectValue === selectValue &&
+            //     product.code === code
 
             
-            ));
+            // ));
   
-            if (!isProductInStockEqual) {
-                let ok = document.querySelector("#ok");
-                let exitPopUp = document.getElementById("fecharPopUp");
+            // if (!isProductInStockEqual) {
+            //     let ok = document.querySelector("#ok");
+            //     let exitPopUp = document.getElementById("fecharPopUp");
 
-                popUp.style.display = 'block';
-                message.innerHTML = 'Não foi encontrado nenhum produto com as informações que você forneceu!'
-                ok.addEventListener('click', () => {limpar()})
-                exitPopUp.addEventListener('click', () => {limpar()})
-            }
+            //     popUp.style.display = 'block';
+            //     message.innerHTML = 'Não foi encontrado nenhum produto com as informações que você forneceu!'
+            //     ok.addEventListener('click', () => {limpar()})
+            //     exitPopUp.addEventListener('click', () => {limpar()})
+            // }
          
             // let isProductInStockQuantity = productsStock.some(product => (
                 
@@ -202,11 +203,12 @@ removeProduct.addEventListener('click', (ev) => {
             //     exitPopUp.addEventListener('click', () => {limpar()})
             // }
 
-            if(isProductInStockEqual) {
+            // if(isProductInStockEqual) {
 
                 let sim = document.querySelector('#sim');
                 let nao = document.querySelector('#nao');
                 let exitPopUpConfirmation = document.querySelector('#fecharPopUpConfirmation');
+    
                 
                 popUpConfirmation.style.display = 'block';
                 messageConfirmation.innerHTML = `Tem certeza que deseja <strong>retirar</strong> este produto: <br> <br>
@@ -226,15 +228,15 @@ removeProduct.addEventListener('click', (ev) => {
                         removeProduct.disabled = false;
                         removeProduct.innerHTML = originalText; 
                     }, 2000); 
+                    console.log(productsStock)
                 
-                
-                sim.addEventListener('click', function () {retirar()});
+                sim.addEventListener('click', () => {retirar()});
     
                 exitPopUpConfirmation.addEventListener('click', () => {cancelar()});
         
                 nao.addEventListener('click', () => { cancelar()});
                 
-            }
+            // }
 
         };
     };
@@ -288,7 +290,7 @@ function cancelar() {
 
 //SIM
 function retirar() {
-
+    
     let name = document.querySelector('#productName').value;
     let indexToRemove;
     popUpConfirmation.style.display = 'none'
@@ -300,12 +302,24 @@ function retirar() {
         }
     }
     productsStock.splice(indexToRemove, 1);
+    
 
     updateTableStock();
-    AdicionarTableRetired();
+    adicionarTableRetired();
+    
+    location.reload();
+    window.onload = function () {
+
+
+        let seeStockTable = document.querySelector('.stock');
+        let seeRetiredTable = document.querySelector('.retired');
+        seeRetiredTable.classList.remove('selected');
+        seeStockTable.classList.add('seleted');
+
+    }
 }
 
-function AdicionarTableRetired() {
+function adicionarTableRetired() {
 
     let nameInput = document.querySelector('#productName');
     let tbody = document.querySelector('.retirada-dados')
@@ -385,6 +399,8 @@ function AdicionarTableRetired() {
         document.getElementById('type').style.color = 'gray'
         document.getElementById('cod').value = '';
         document.getElementById('receiver').value = '';
+
+        saveToLocalStorageRetired(); //1r
         
         togglePopUpTable();
 
@@ -396,9 +412,8 @@ function AdicionarTableRetired() {
         console.log('');
     }
        
-
-
 }
+
 
 removeProduct.addEventListener('mouseover', () => {
 
@@ -410,38 +425,23 @@ removeProduct.addEventListener('mouseout', () => {
     removeProduct.style.backgroundColor = '#255E46'
 });
 
-function loadFromLocalStorage() {
-    const storedProducts = localStorage.getItem('productsStock');
-    if (storedProducts) {
-        productsStock = JSON.parse(storedProducts);
-        updateTableStock();
-    }
-}
-
-window.onload = function () {
-    
-    let tableStock = document.querySelector('#estoque');
-    tableStock.style.display = 'none';
-    
-    loadFromLocalStorage();
 
 
-}
+
         
 
 function updateTableStock() {
     
     const tbody = document.querySelector('.estoque-dados');
     popUpConfirmation.style.display = 'none'
-    
-    
+
     if (document.querySelectorAll('#estoque tbody tr').length === 0) {
-        
+    
         function createTable() {
             
             let theadStock = document.querySelector('#estoque thead');
             let trThead = document.createElement('tr');
-            theadStock.append(trThead);
+            theadStock.appendChild(trThead);
             
             let produto = document.createElement('th');
             produto.setAttribute('scope', 'col');
@@ -465,46 +465,88 @@ function updateTableStock() {
         createTable();
     }
 
+
     tbody.innerHTML = '';
+
 
     productsStock.forEach((produto) => {
 
         let tr = document.createElement('tr');
-            tr.classList.add(produto.name);
+        tr.classList.add(produto.name);
+
+        tbody.appendChild(tr);
+            
+        let item = document.createElement('td');
+        item.classList.add('item');
+        item.innerText = produto.name;
+        
+        let quantity = document.createElement('td');
+        quantity.classList.add('quantity');
+        quantity.innerText = produto.productQuantity;
+        
+        let type = document.createElement('td');
+        type.classList.add('tipo')
+        type.innerText = produto.selectValue;
+        
+        let codigo = document.createElement('td');
+        codigo.classList.add('codigo');
+        codigo.innerText = produto.code;
     
-            tbody.appendChild(tr);
-                
-            let item = document.createElement('td');
-            item.classList.add('item');
-            item.innerText = produto.name;
-            
-            let quantity = document.createElement('td');
-            quantity.classList.add('quantity');
-            quantity.innerText = produto.productQuantity;
-            
-            let type = document.createElement('td');
-            type.classList.add('tipo')
-            type.innerText = produto.selectValue;
-            
-            let codigo = document.createElement('td');
-            codigo.classList.add('codigo');
-            codigo.innerText = produto.code;
-            
-            tr.append(item, quantity, type, codigo);
+        tr.append(item, quantity, type, codigo);
 
             
     });
 
-    saveToLocalStorageBack();
+    saveToLocalStorageBack(); //5s
 
     console.log(productsStock)
 }
 
-function saveToLocalStorageBack() {
-    localStorage.setItem('productsStock', JSON.stringify(productsStock));
+
+
+function limparStock() {
+
+    localStorage.clear();
+    location.reload();
+
 }
 
-// localStorage.clear();
+
+window.onload = function () {
+    
+    let tableStock = document.querySelector('#estoque');
+    tableStock.style.display = 'none';
+
+    loadFromLocalStorage(); //3s
+    loadFromLocalStorageRetiredBack(); //7r
+    
+    
+}
+
+
+function loadFromLocalStorage() {
+    const storedProducts = localStorage.getItem('productsStock');
+    if (storedProducts) {
+        productsStock = JSON.parse(storedProducts);
+        updateTableStock(); //4s
+    }
+}
+
+function saveToLocalStorageBack() {
+    localStorage.setItem('productsStock', JSON.stringify(productsStock)); //6s
+}
 
 
 
+
+function saveToLocalStorageRetired() {
+    localStorage.setItem('productsRetired', JSON.stringify(productsRetired)); //2r
+}
+
+function loadFromLocalStorageRetiredBack() {
+    const retiredProducts = localStorage.getItem('productsRetired');
+    if (retiredProducts) {
+        productsRetired = JSON.parse(retiredProducts);
+        adicionarTableRetired(); //8r
+    }
+}

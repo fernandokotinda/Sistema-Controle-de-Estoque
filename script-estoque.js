@@ -1,7 +1,6 @@
 //Add tabela
 let addProduct = document.getElementById("addProduct");
 
-
 addProduct.addEventListener('click', (ev) => {
 
         let name = document.querySelector('#productName').value;
@@ -149,7 +148,7 @@ addProduct.addEventListener('click', (ev) => {
             
             //Adicionando tabela
             if(regex.test(productQuantity) && selectValue !== 'Tipo' && !(code.length < 6) && regexCode.test(code)) {
-                
+
                 let sim = document.querySelector('#sim');
                 let nao = document.querySelector('#nao');
                 let exitPopUpConfirmation = document.querySelector('#fecharPopUpConfirmation');
@@ -175,18 +174,15 @@ addProduct.addEventListener('click', (ev) => {
                 
                 
                 sim.addEventListener('click', function () {adicionar()});
-                
                 exitPopUpConfirmation.addEventListener('click', () => {cancelar()});
-                
                 nao.addEventListener('click', () => {cancelar()});
                 
 
-                
-                
             }    
         }  
     });
 
+//subs
 //NÃO   
 function cancelar() {
 
@@ -218,16 +214,14 @@ function cancelar() {
 
 //SIM
 function adicionar() {
-
+    
     let nameInput = document.querySelector('#productName');
     let tbody = document.querySelector('.estoque-dados')
 
-    
     popUpConfirmation.style.display = 'none'
-    
-    
+
     if (document.querySelectorAll('#estoque tbody tr').length === 0) {
-        
+
         function createTable() {
             
             let theadStock = document.querySelector('#estoque thead');
@@ -257,7 +251,7 @@ function adicionar() {
     }
 
     try{
-
+        
         tbody.innerHTML = ''
         
         productsStock.forEach((produto) => {
@@ -293,7 +287,7 @@ function adicionar() {
         document.getElementById('type').style.color = 'gray'
         document.getElementById('cod').value = '';
 
-        saveToLocalStorage();
+        saveToLocalStorage(); //1s
         
         togglePopUpTable();
 
@@ -308,26 +302,149 @@ function adicionar() {
        
 }
 
-function saveToLocalStorage() {
+
+
+
+function limparStock() {
+
+    localStorage.clear();
+    location.reload();
+}
+
+
+function updateTableRetired() {
+
+    let nameInput = document.querySelector('#productName');
+    let tbody = document.querySelector('.retirada-dados')
+
+    if (document.querySelectorAll('#retirada tbody tr').length === 0) {
+        
+        function createTable() {
+            
+            let theadRetired = document.querySelector('#retirada thead');
+            let trThead = document.createElement('tr');
+            theadRetired.append(trThead);
+            
+            let produto = document.createElement('th');
+            produto.setAttribute('scope', 'col');
+            produto.innerText = 'Produto'
+            
+            let quantidade = document.createElement('th');
+            quantidade.setAttribute('scope', 'col');
+            quantidade.innerText = 'Quantidade'
+            
+            let tipoProduto = document.createElement('th');
+            tipoProduto.setAttribute('scope', 'col');
+            tipoProduto.innerText = 'Tipo';
+            
+            let codigoProduto = document.createElement('th');
+            codigoProduto.setAttribute('scope', 'col');
+            codigoProduto.innerText = 'Código';
+
+            let destinatarioProduto = document.createElement('th');
+            destinatarioProduto.setAttribute('scope', 'col');
+            destinatarioProduto.innerText = 'Destinatário'
+            
+            trThead.append(produto, quantidade, tipoProduto, codigoProduto, destinatarioProduto)
+            
+        }
+        createTable();
+    }
+
+    try{
+
+        tbody.innerHTML = ''
+        
+        productsRetired.forEach((produto) => {
+
+            let tr = document.createElement('tr');
+            tr.classList.add(produto.name);
+    
+            tbody.appendChild(tr);
+                
+            let item = document.createElement('td');
+            item.classList.add('item');
+            item.innerText = produto.name;
+            
+            let quantity = document.createElement('td');
+            quantity.classList.add('quantity');
+            quantity.innerText = produto.productQuantity;
+            
+            let type = document.createElement('td');
+            type.classList.add('tipo')
+            type.innerText = produto.selectValue;
+            
+            let codigo = document.createElement('td');
+            codigo.classList.add('codigo');
+            codigo.innerText = produto.code;
+
+            let destinatario = document.createElement('td');
+            destinatario.classList.add('destinatario');
+            destinatario.innerText = produto.receiver;
+            
+            tr.append(item, quantity, type, codigo, destinatario)
+
+        })
+        
+        document.getElementById('productName').value = '';
+        document.getElementById('productQuantity').value = '';
+        document.getElementById('type').value = 'Tipo';
+        document.getElementById('type').style.color = 'gray'
+        document.getElementById('cod').value = '';
+
+        saveToLocalStorageRetiredBack(); //5r
+        
+        togglePopUpTable();
+
+    
+        nameInput.focus();
+
+    } catch {
+
+        console.log('');
+    }
+       
+}
+
+
+
+function saveToLocalStorage() { // 2s
     localStorage.setItem('productsStock', JSON.stringify(productsStock));
 }
+
+
 function loadFromLocalStorageBack() {
     const storedProducts = localStorage.getItem('productsStock');
     if (storedProducts) {
         productsStock = JSON.parse(storedProducts);
-        adicionar();
+        adicionar(); //8s
     }
 }
+
+
+
 window.onload = function () {
     
-    // let tableStock = document.querySelector('#estoque');
-    // tableStock.style.display = 'none';
+    let tableRetired = document.querySelector('#retirada');
+    tableRetired.style.display = 'none';
     
-    loadFromLocalStorageBack();
-
+    loadFromLocalStorageBack(); //7s
+    loadFromLocalStorageRetired(); //3r
 
 }
-// localStorage.clear();
+
+function loadFromLocalStorageRetired() { 
+
+    const retiredProducts = localStorage.getItem('productsRetired');
+    if (retiredProducts) {
+        productsRetired = JSON.parse(retiredProducts);
+        updateTableRetired(); //4r
+    }
+}
+
+function saveToLocalStorageRetiredBack() {
+    localStorage.setItem('productsRetired', JSON.stringify(productsRetired)); //6r
+}
 
 
 

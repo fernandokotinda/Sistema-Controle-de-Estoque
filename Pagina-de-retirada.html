@@ -15,7 +15,10 @@
 
 <header>
     <div id="header">
-        <img src="imgs/logo-pagina.png" alt="Logo">
+        <div class="logo">
+            <img src="imgs/logo-pagina.png" class="logo-slb" alt="Logo Slb">
+            <img src="imgs/valvet logo.png" class="logo-valmet" alt="Logo Valvet">
+        </div>
         <h1>Controle de Estoque Administrador</h1>
         <a href="controle-estoque.html"><button class="btn-top" type="button">Adicionar ao estoque<img
                     src="imgs/seta-direita.png" alt="Seta para Direita"></button></a>
@@ -46,6 +49,9 @@
                         <p class="popUpMessageTable">Nenhum produto foi retirado do estoque!</p>
                     </div>
                 </div>
+            </div>
+            <div id="limpar">
+                <button type="button" id="clear" style="display: none;" onclick="limparStock()">Limpar tabela</button>
             </div>
         </div>
         <div class="campo-form">

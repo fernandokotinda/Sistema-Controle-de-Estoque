@@ -1,3 +1,5 @@
+
+
 //Mudar cor no select
 let selectElement = document.getElementById("type");
 
@@ -27,6 +29,7 @@ function togglePopUpTable() {
     let popUpTable = document.getElementById("popUpTable");
     let messageTable = document.querySelector('.popUpMessageTable');
     let tabelaOverflow = document.querySelector('.tabela');
+    let clearButton = document.querySelector('#clear');
 
 
     if (stockTableRows.length === 0) {
@@ -39,6 +42,7 @@ function togglePopUpTable() {
     } else {
 
         popUpTable.style.display = 'none';
+        clearButton.style.display = 'block';
         tabelaOverflow.style.overflowY = 'auto';
         tabelaOverflow.style.boxShadow = 'rgba(255, 255, 255, 0.332) 3px 3px 20px 0px';
 
@@ -47,6 +51,7 @@ function togglePopUpTable() {
     if(retiredTableRows.length === 0 && stockTable.style.display === 'none') {
 
         popUpTable.style.display = 'block';
+        clearButton.style.display = 'none';
         messageTable.textContent = 'Nenhum produto foi retirado do estoque!';
         tabelaOverflow.style.overflowY = 'hidden';
         tabelaOverflow.style.boxShadow = 'none';
@@ -54,6 +59,7 @@ function togglePopUpTable() {
     } else {
 
         popUpTable.style.display = 'none';
+        clearButton.style.display = 'block';
         tabelaOverflow.style.overflowY = 'auto';
         tabelaOverflow.style.boxShadow = 'rgba(255, 255, 255, 0.332) 3px 3px 20px 0px';
     }
@@ -61,6 +67,7 @@ function togglePopUpTable() {
     if(stockTableRows.length === 0 && retiredTable.style.display === 'none') {
 
         popUpTable.style.display = 'block';
+        clearButton.style.display = 'none';
         messageTable.textContent = 'Nenhum produto foi adicionado ao estoque!';
         tabelaOverflow.style.overflowY = 'hidden';
         tabelaOverflow.style.boxShadow = 'none';
@@ -181,6 +188,12 @@ function arrayRetired() {
     console.log(productsRetired)
 
 }
+
+
+
+
+
+
 
 
 

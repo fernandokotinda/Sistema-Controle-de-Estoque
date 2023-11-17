@@ -100,3 +100,12 @@ input, select{
     color: #309168;  
 
 }
+#clear {
+
+    background-color: #176b6b;
+    width: 100%;
+}
+#clear:hover {
+
+    background-color: #1e9393;
+}
