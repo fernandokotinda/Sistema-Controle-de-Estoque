@@ -31,7 +31,6 @@ function togglePopUpTable() {
     let tabelaOverflow = document.querySelector('.tabela');
     let clearButton = document.querySelector('#clear');
 
-
     if (stockTableRows.length === 0) {
 
         popUpTable.style.display = 'block';
@@ -81,6 +80,7 @@ let seeRetiredTable = document.querySelector('.retired');
 let stockTable = document.getElementById('estoque');
 let retiredTable = document.getElementById('retirada')
 
+
 seeStockTable.addEventListener('click', () => {
     
     stockTable.style.display = 'block';
@@ -102,8 +102,6 @@ seeRetiredTable.addEventListener('click', () => {
     togglePopUpTable();
     
 })
-
-
 
 //Texto ao clicar para baixar
 document.addEventListener("DOMContentLoaded", function () {
@@ -190,11 +188,4 @@ function arrayRetired() {
 }
 
 
-
-
-
-
-
-
-
-
+ 

@@ -1,3 +1,4 @@
+
 //Add tabela
 let addProduct = document.getElementById("addProduct");
 
@@ -217,11 +218,13 @@ function adicionar() {
     
     let nameInput = document.querySelector('#productName');
     let tbody = document.querySelector('.estoque-dados')
+    let confirmar = true;
 
     popUpConfirmation.style.display = 'none'
 
     if (document.querySelectorAll('#estoque tbody tr').length === 0) {
 
+        confirmar = false;
         function createTable() {
             
             let theadStock = document.querySelector('#estoque thead');
@@ -248,6 +251,12 @@ function adicionar() {
             
         }
         createTable();
+
+        if (document.querySelectorAll('#estoque thead tr').length > 1) {
+
+            location.reload();
+        }
+        
     }
 
     try{
@@ -287,6 +296,8 @@ function adicionar() {
         document.getElementById('type').style.color = 'gray'
         document.getElementById('cod').value = '';
 
+        
+
         saveToLocalStorage(); //1s
         
         togglePopUpTable();
@@ -301,8 +312,6 @@ function adicionar() {
     }
        
 }
-
-
 
 
 function limparStock() {
@@ -349,6 +358,11 @@ function updateTableRetired() {
             
         }
         createTable();
+        
+    }
+    if (document.querySelectorAll('#estoque thead tr').length > 1) {
+
+        location.reload();
     }
 
     try{
@@ -428,6 +442,7 @@ window.onload = function () {
     let tableRetired = document.querySelector('#retirada');
     tableRetired.style.display = 'none';
     
+    
     loadFromLocalStorageBack(); //7s
     loadFromLocalStorageRetired(); //3r
 
@@ -445,6 +460,9 @@ function loadFromLocalStorageRetired() {
 function saveToLocalStorageRetiredBack() {
     localStorage.setItem('productsRetired', JSON.stringify(productsRetired)); //6r
 }
+
+
+    
 
 
 
