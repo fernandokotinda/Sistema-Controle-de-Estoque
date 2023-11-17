@@ -236,7 +236,7 @@ removeProduct.addEventListener('click', (ev) => {
     
                 exitPopUpConfirmation.addEventListener('click', () => {cancelar()});
         
-                nao.addEventListener('click', () => { cancelar()});
+                nao.addEventListener('click', () => {cancelar()});
                 
             }
 
@@ -244,6 +244,36 @@ removeProduct.addEventListener('click', (ev) => {
     };
 });
 //LIMPAR 
+
+function cancelar() {
+
+    let nameInput = document.querySelector('#productName');
+
+    popUpConfirmation.style.display = "none";
+
+    document.getElementById('productName').value = '';
+    document.getElementById('productQuantity').value = '';
+    document.getElementById('type').value = 'Tipo';
+    document.getElementById('type').style.color = 'gray'
+    document.getElementById('cod').value = '';
+    document.getElementById('receiver').value = '';
+
+    let addProduct = document.getElementById("addProduct");
+        addProduct.disabled = true;
+        const originalText = 'Adicionar ao Estoque'; 
+        
+        addProduct.innerHTML = "Envio do produto cancelado!";
+        
+        setTimeout(function () {
+            addProduct.disabled = false;
+            addProduct.innerHTML = originalText; 
+        }, 2000);
+
+
+    
+    nameInput.focus();
+    
+}
 
 function limpar() {
 
@@ -261,50 +291,25 @@ function limpar() {
     nameInput.focus();
 
 }
-//NÃO   
-function cancelar() {
+  
 
-    let nameInput = document.querySelector('#productName');
-
-    popUpConfirmation.style.display = "none";
-
-    let removeProduct = document.getElementById("removeProduct");     
-        removeProduct.disabled = true;
-        const originalText = 'Remover do Estoque'; 
-        
-        removeProduct.innerHTML = "Remoção do produto cancelado!";
-        
-        setTimeout(function () {
-            removeProduct.disabled = false;
-            removeProduct.innerHTML = originalText; 
-        }, 2000);
-
-    document.getElementById('productName').value = '';
-    document.getElementById('productQuantity').value = '';
-    document.getElementById('type').value = 'Tipo';
-    document.getElementById('type').style.color = 'gray'
-    document.getElementById('cod').value = '';
-    document.getElementById('receiver').value = ''
-    
-    nameInput.focus();
-    
-}
 
 //SIM
 function retirar() {
     
     let name = document.querySelector('#productName').value;
-    let indexToRemove;
+    let idToRemove;
 
     popUpConfirmation.style.display = 'none'
 
     for (let i in productsStock) {
         if (productsStock[i].name === name) {
-            indexToRemove = i;
+            idToRemove = productsStock[i].id;;
             break;
         }
     }
-    productsStock.splice(indexToRemove, 1);
+    // productsStock.splice(indexToRemove, 1);
+    productsStock = productsStock.filter(product => product.id !== idToRemove)
 
     
     updateTableStock();
@@ -429,40 +434,8 @@ function updateTableStock() {
     const tbody = document.querySelector('.estoque-dados');
     popUpConfirmation.style.display = 'none'
 
-    if (document.querySelectorAll('#estoque tbody tr').length === 0) {
-
-        function createTable() {
-                
-            let theadStock = document.querySelector('#estoque thead');
-            let trThead = document.createElement('tr');
-            theadStock.appendChild(trThead);
-            
-            let produto = document.createElement('th');
-            produto.setAttribute('scope', 'col');
-            produto.innerText = 'Produto'
-            
-            let quantidade = document.createElement('th');
-            quantidade.setAttribute('scope', 'col');
-            quantidade.innerText = 'Quantidade'
-            
-            let tipoProduto = document.createElement('th');
-            tipoProduto.setAttribute('scope', 'col');
-            tipoProduto.innerText = 'Tipo';
-            
-            let codigoProduto = document.createElement('th');
-            codigoProduto.setAttribute('scope', 'col');
-            codigoProduto.innerText = 'Código';
-            
-            trThead.append(produto, quantidade, tipoProduto, codigoProduto)
-            
-        }
-        createTable();
-
-         } 
-         
     tbody.innerHTML = '';
-
-
+    
     productsStock.forEach((produto) => {
 
         let tr = document.createElement('tr');
@@ -485,14 +458,51 @@ function updateTableStock() {
         let codigo = document.createElement('td');
         codigo.classList.add('codigo');
         codigo.innerText = produto.code;
-    
+        
         tr.append(item, quantity, type, codigo);
 
             
     });
 
-   
-
+    let tbodyRows = document.querySelectorAll('#estoque tbody tr');
+    let theadRows = document.querySelectorAll('#estoque thead tr');
+         
+    if (tbodyRows.length >= 1 && theadRows.length === 0) {
+    
+        function createTable() {
+            
+            let theadStock = document.querySelector('#estoque thead');
+            let trThead = document.createElement('tr');
+            theadStock.append(trThead);
+            
+            let produto = document.createElement('th');
+            produto.setAttribute('scope', 'col');
+            produto.innerText = 'Produto'
+            
+            let quantidade = document.createElement('th');
+            quantidade.setAttribute('scope', 'col');
+            quantidade.innerText = 'Quantidade'
+            
+            let tipoProduto = document.createElement('th');
+            tipoProduto.setAttribute('scope', 'col');
+            tipoProduto.innerText = 'Tipo';
+            
+            let codigoProduto = document.createElement('th');
+            codigoProduto.setAttribute('scope', 'col');
+            codigoProduto.innerText = 'Código';
+            
+            trThead.append(produto, quantidade, tipoProduto, codigoProduto)
+            
+        }
+        createTable();
+    
+    } 
+    
+    
+    if (theadRows.length > 1) {
+            
+        location.reload();
+    }
 
     saveToLocalStorageBack(); //5s
 

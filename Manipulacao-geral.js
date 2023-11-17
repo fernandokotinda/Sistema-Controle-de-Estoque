@@ -155,6 +155,7 @@ function arrayStock() {
 
     let propProductsStock = {
 
+        id: generateUniqueId(),
         name: name,
         productQuantity: productQuantity,
         selectValue: selectValue,
@@ -186,6 +187,16 @@ function arrayRetired() {
     console.log(productsRetired)
 
 }
+let tbodyRows = document.querySelectorAll('#estoque tbody tr');
+try {
 
+    if(tbodyRows.length === 0) {
+        
+        let thead = document.querySelector('#estoque thead tr');
+        thead.remove();
+    }
+} catch {
 
- 
+    console.log('')
+}
+function generateUniqueId() { return new Date().getTime()};

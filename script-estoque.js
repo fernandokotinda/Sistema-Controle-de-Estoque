@@ -175,16 +175,17 @@ addProduct.addEventListener('click', (ev) => {
                 
                 
                 sim.addEventListener('click', function () {adicionar()});
+
                 exitPopUpConfirmation.addEventListener('click', () => {cancelar()});
+        
                 nao.addEventListener('click', () => {cancelar()});
+
                 
 
             }    
         }  
     });
 
-//subs
-//NÃO   
 function cancelar() {
 
     let nameInput = document.querySelector('#productName');
@@ -212,52 +213,17 @@ function cancelar() {
     nameInput.focus();
     
 }
+ 
 
 //SIM
 function adicionar() {
     
     let nameInput = document.querySelector('#productName');
     let tbody = document.querySelector('.estoque-dados')
-    let confirmar = true;
 
     popUpConfirmation.style.display = 'none'
-
-    if (document.querySelectorAll('#estoque tbody tr').length === 0) {
-
-        confirmar = false;
-        function createTable() {
-            
-            let theadStock = document.querySelector('#estoque thead');
-            let trThead = document.createElement('tr');
-            theadStock.append(trThead);
-            
-            let produto = document.createElement('th');
-            produto.setAttribute('scope', 'col');
-            produto.innerText = 'Produto'
-            
-            let quantidade = document.createElement('th');
-            quantidade.setAttribute('scope', 'col');
-            quantidade.innerText = 'Quantidade'
-            
-            let tipoProduto = document.createElement('th');
-            tipoProduto.setAttribute('scope', 'col');
-            tipoProduto.innerText = 'Tipo';
-            
-            let codigoProduto = document.createElement('th');
-            codigoProduto.setAttribute('scope', 'col');
-            codigoProduto.innerText = 'Código';
-            
-            trThead.append(produto, quantidade, tipoProduto, codigoProduto)
-            
-        }
-        createTable();
-
-        if (document.querySelectorAll('#estoque thead tr').length > 1) {
-
-            location.reload();
-        }
         
-    }
+    
 
     try{
         
@@ -289,6 +255,45 @@ function adicionar() {
             tr.append(item, quantity, type, codigo)
 
         })
+
+        let tbodyRows = document.querySelectorAll('#estoque tbody tr');
+        let theadRows = document.querySelectorAll('#estoque thead tr');
+
+        if (tbodyRows.length >= 1 && theadRows.length === 0) {
+    
+            function createTable() {
+                
+                let theadStock = document.querySelector('#estoque thead');
+                let trThead = document.createElement('tr');
+                theadStock.append(trThead);
+                
+                let produto = document.createElement('th');
+                produto.setAttribute('scope', 'col');
+                produto.innerText = 'Produto'
+                
+                let quantidade = document.createElement('th');
+                quantidade.setAttribute('scope', 'col');
+                quantidade.innerText = 'Quantidade'
+                
+                let tipoProduto = document.createElement('th');
+                tipoProduto.setAttribute('scope', 'col');
+                tipoProduto.innerText = 'Tipo';
+                
+                let codigoProduto = document.createElement('th');
+                codigoProduto.setAttribute('scope', 'col');
+                codigoProduto.innerText = 'Código';
+                
+                trThead.append(produto, quantidade, tipoProduto, codigoProduto)
+                
+            }
+            createTable();
+        
+        }
+
+        if (theadRows.length > 1) {
+                
+            location.reload();
+        }
         
         document.getElementById('productName').value = '';
         document.getElementById('productQuantity').value = '';
@@ -359,11 +364,7 @@ function updateTableRetired() {
         }
         createTable();
         
-    }
-    if (document.querySelectorAll('#estoque thead tr').length > 1) {
-
-        location.reload();
-    }
+    } 
 
     try{
 
