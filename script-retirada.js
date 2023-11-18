@@ -193,8 +193,9 @@ removeProduct.addEventListener('click', (ev) => {
                 exitPopUp.addEventListener('click', () => {limpar()})
 
             } 
-            if(removeQuantity) {
-                
+            if(removeQuantity) {subtrair(name, productQuantity)}
+            
+            if(isProductInStockEqual) {
                 let sim = document.querySelector('#sim');
                 let nao = document.querySelector('#nao');
                 let exitPopUpConfirmation = document.querySelector('#fecharPopUpConfirmation');
@@ -219,7 +220,7 @@ removeProduct.addEventListener('click', (ev) => {
                     }, 2000); 
                     console.log(productsStock)
                 
-                sim.addEventListener('click', () => {subtrair(name, productQuantity)});
+                sim.addEventListener('click', () => {retirar()});
                 exitPopUpConfirmation.addEventListener('click', () => {cancelar()});
                 nao.addEventListener('click', () => {cancelar()});
 
@@ -244,7 +245,7 @@ function subtrair(name, productQuantity) {
         // Adicionar o produto retirado à tabela de produtos retirados
         retirarProduto(produtoNoEstoque, productQuantity);
     } else {
-        console.error('Produto não encontrado ou quantidade insuficiente no estoque.');
+        console.error('Quantidade insuficiente no estoque.');
     }
 }
 
