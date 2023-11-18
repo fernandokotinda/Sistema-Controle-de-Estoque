@@ -229,22 +229,4 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
-// function limparRetirada() {
-//     localStorage.removeItem('productsRetired');
-//     productsRetired = []; // Limpar a variável local também, se necessário
-//     adicionarTableRetired(); // Atualizar a tabela de retirada após limpar
-// }
 
-// // Função para limpar os dados da tabela de estoque
-// function limparEstoque() {
-//     localStorage.removeItem('productsStock');
-//     productsStock = []; // Limpar a variável local também, se necessário
-//     updateTableStock(); // Atualizar a tabela de estoque após limpar
-// }
-
-// let limparRetiradaBtn = document.querySelector('.limparRetiradaBtn');
-// limparRetiradaBtn.addEventListener('click', limparRetirada);
-
-// // Exemplo de chamada para limpar a tabela de estoque ao clicar em um botão
-// let limparEstoqueBtn = document.querySelector('.limparEstoqueBtn');
-// limparEstoqueBtn.addEventListener('click', limparEstoque);
