@@ -163,6 +163,7 @@ function arrayRetired() {
     console.log(productsRetired)
 
 }
+
 let tbodyRows = document.querySelectorAll('#estoque tbody tr');
 try {
 

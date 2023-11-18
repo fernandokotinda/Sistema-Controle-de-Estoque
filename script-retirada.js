@@ -1,8 +1,5 @@
-
-
 //Remover produto da tabela
 let removeProduct = document.querySelector('#removeProduct');
-
 
 removeProduct.addEventListener('click', (ev) => {
 
@@ -165,17 +162,28 @@ removeProduct.addEventListener('click', (ev) => {
             let selectValue = document.querySelector('#type').value;
             let code = document.getElementById('cod').value;
 
+
             let isProductInStockEqual = productsStock.some(product => (
                 
-                product.name === name &&
+                product.name === name && 
                 product.productQuantity === productQuantity &&
-                product.selectValue === selectValue &&
+                product.selectValue === selectValue && 
                 product.code === code
 
-            
             ));
-  
-            if (!isProductInStockEqual) {
+
+            let removeQuantity = productsStock.some(product => (
+                
+                product.name === name && 
+                product.productQuantity !== productQuantity &&
+                product.selectValue === selectValue && 
+                product.code === code
+
+            ));
+
+            
+            if (!isProductInStockEqual && !removeQuantity) {
+
                 let ok = document.querySelector("#ok");
                 let exitPopUp = document.getElementById("fecharPopUp");
 
@@ -183,35 +191,14 @@ removeProduct.addEventListener('click', (ev) => {
                 message.innerHTML = 'Não foi encontrado nenhum produto com as informações que você forneceu!'
                 ok.addEventListener('click', () => {limpar()})
                 exitPopUp.addEventListener('click', () => {limpar()})
-            }
-         
-            // let isProductInStockQuantity = productsStock.some(product => (
+
+            } 
+            if(removeQuantity) {
                 
-            //     product.name === name &&
-            //     product.productQuantity > productQuantity &&
-            //     product.selectValue === selectValue &&
-            //     product.code === code
-
-            
-            // ));
-
-            // if (!isProductInStockQuantity) {
-            //     let ok = document.querySelector("#ok");
-            //     let exitPopUp = document.getElementById("fecharPopUp");
-
-            //     popUp.style.display = 'block';
-            //     message.innerHTML = 'A quantidade que deseja retirar é insuficiente!'
-            //     ok.addEventListener('click', () => {limpar()})
-            //     exitPopUp.addEventListener('click', () => {limpar()})
-            // }
-
-            if(isProductInStockEqual) {
-
                 let sim = document.querySelector('#sim');
                 let nao = document.querySelector('#nao');
                 let exitPopUpConfirmation = document.querySelector('#fecharPopUpConfirmation');
-    
-                
+
                 popUpConfirmation.style.display = 'block';
                 messageConfirmation.innerHTML = `Tem certeza que deseja <strong>retirar</strong> este produto: <br> <br>
                 <font color = '#9aaed9'><strong>Nome do produto:</strong></font>  ${name} <br>
@@ -219,7 +206,7 @@ removeProduct.addEventListener('click', (ev) => {
                 <font color = '#9aaed9'><strong>Tipo:</strong></font>  ${selectValue} <br>
                 <font color = '#9aaed9'><strong>Código:</strong></font>  ${code} <br>
                 <font color = '#9aaed9'><strong>Destinatário:</strong></font> ${receiver} <br>`
-    
+
                 let removeProduct = document.getElementById("removeProduct");
                     removeProduct.disabled = true;
                     const originalText = removeProduct.innerHTML; 
@@ -232,17 +219,51 @@ removeProduct.addEventListener('click', (ev) => {
                     }, 2000); 
                     console.log(productsStock)
                 
-                sim.addEventListener('click', () => {retirar()});
-    
+                sim.addEventListener('click', () => {subtrair(name, productQuantity)});
                 exitPopUpConfirmation.addEventListener('click', () => {cancelar()});
-        
                 nao.addEventListener('click', () => {cancelar()});
-                
+
             }
+
+ 
 
         };
     };
 });
+
+function subtrair(name, productQuantity) {
+
+    let produtoNoEstoque = productsStock.find(product => product.name === name);
+
+    if (produtoNoEstoque && produtoNoEstoque.productQuantity >= parseInt(productQuantity)) {
+        produtoNoEstoque.productQuantity -= parseInt(productQuantity);
+
+        // Atualizar a tabela de estoque
+        updateTableStock();
+
+        // Adicionar o produto retirado à tabela de produtos retirados
+        retirarProduto(produtoNoEstoque, productQuantity);
+    } else {
+        console.error('Produto não encontrado ou quantidade insuficiente no estoque.');
+    }
+}
+
+function retirarProduto(produto, quantityToRemove) {
+
+    let propProductsRetired = {
+        name: produto.name,
+        productQuantity: quantityToRemove,
+        selectValue: produto.selectValue,
+        code: produto.code,
+        receiver: document.getElementById('receiver').value
+    };
+
+    productsRetired.push(propProductsRetired);
+
+    // Atualizar a tabela de produtos retirados
+    adicionarTableRetired();
+}
+
 //LIMPAR 
 
 function cancelar() {
@@ -311,10 +332,8 @@ function retirar() {
 
     productsStock = productsStock.filter(product => product.id !== idToRemove)
 
-    
     updateTableStock();
     adicionarTableRetired();
-    location.reload();
     
 }
 
@@ -435,40 +454,48 @@ function updateTableStock() {
     popUpConfirmation.style.display = 'none'
 
     tbody.innerHTML = '';
-    
-    productsStock.forEach((produto) => {
 
-        let tr = document.createElement('tr');
-        tr.classList.add(produto.name);
+        productsStock.forEach((produto) => {
+            if (produto.productQuantity > 0) {
 
-        tbody.appendChild(tr);
-            
-        let item = document.createElement('td');
-        item.classList.add('item');
-        item.innerText = produto.name;
+                let tr = document.createElement('tr');
+                tr.classList.add(produto.name);
         
-        let quantity = document.createElement('td');
-        quantity.classList.add('quantity');
-        quantity.innerText = produto.productQuantity;
+                tbody.appendChild(tr);
+                    
+                let item = document.createElement('td');
+                item.classList.add('item');
+                item.innerText = produto.name;
+                
+                let quantity = document.createElement('td');
+                quantity.classList.add('quantity');
+                quantity.innerText = produto.productQuantity;
+                
+                let type = document.createElement('td');
+                type.classList.add('tipo')
+                type.innerText = produto.selectValue;
+                
+                let codigo = document.createElement('td');
+                codigo.classList.add('codigo');
+                codigo.innerText = produto.code;
+                
+                tr.append(item, quantity, type, codigo);
         
-        let type = document.createElement('td');
-        type.classList.add('tipo')
-        type.innerText = produto.selectValue;
-        
-        let codigo = document.createElement('td');
-        codigo.classList.add('codigo');
-        codigo.innerText = produto.code;
-        
-        tr.append(item, quantity, type, codigo);
 
-            
-    });
+            } else {
+                
+                subtrair();
+                
+            }
+                
+        });
 
+        
     let tbodyRows = document.querySelectorAll('#estoque tbody tr');
     let theadRows = document.querySelectorAll('#estoque thead tr');
          
     if (tbodyRows.length >= 1 && theadRows.length === 0) {
-    
+        
         function createTable() {
             
             let theadStock = document.querySelector('#estoque thead');
@@ -495,14 +522,31 @@ function updateTableStock() {
             
         }
         createTable();
-    
+        
     } 
     
     
     if (theadRows.length > 1) {
-            
+        
         location.reload();
+        
     }
+    
+
+    try {
+
+        if (tbodyRows.length === 0) {
+
+            let thead = document.querySelector('#estoque thead tr');
+            thead.remove();
+        }
+
+    } catch {
+
+    console.log('')
+
+    }
+
 
     saveToLocalStorageBack(); //5s
 
@@ -554,5 +598,4 @@ function loadFromLocalStorageRetiredBack() {
         adicionarTableRetired(); //8r
     }
 }
-
 

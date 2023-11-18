@@ -1,4 +1,3 @@
-
 //Add tabela
 let addProduct = document.getElementById("addProduct");
 
@@ -153,34 +152,65 @@ addProduct.addEventListener('click', (ev) => {
                 let sim = document.querySelector('#sim');
                 let nao = document.querySelector('#nao');
                 let exitPopUpConfirmation = document.querySelector('#fecharPopUpConfirmation');
-                
-                popUpConfirmation.style.display = 'block';
-                messageConfirmation.innerHTML = `Tem certeza que deseja <strong>adicionar</strong> este produto: <br> <br>
-                <font color = '#9aaed9'><strong>Nome do produto:</strong></font>  ${name} <br>
-                <font color = '#9aaed9'><strong>Quantidade:</strong></font>  ${productQuantity} <br>
-                <font color = '#9aaed9'><strong>Tipo:</strong></font>  ${selectValue} <br>
-                <font color = '#9aaed9'><strong>Código:</strong></font>  ${code} <br>`
 
-                
-                let addProduct = document.getElementById("addProduct");
-                addProduct.disabled = true;
-                const originalText = addProduct.innerHTML; 
-                
-                addProduct.innerHTML = "Produto adicionado! ✔";
-                
-                setTimeout(function () {
-                    addProduct.disabled = false;
-                    addProduct.innerHTML = originalText; 
-                }, 2000); 
-                
-                
-                sim.addEventListener('click', function () {adicionar()});
+                let produtoExistente = productsStock.find((produto) => produto.name === name && produto.code === code && produto.selectValue === selectValue);
 
-                exitPopUpConfirmation.addEventListener('click', () => {cancelar()});
-        
-                nao.addEventListener('click', () => {cancelar()});
+                if (produtoExistente) {
+                    
+                    produtoExistente.productQuantity = parseInt(produtoExistente.productQuantity) + parseInt(productQuantity);
 
-                
+                    popUp.style.display = 'block';
+                    message.innerHTML = `Foi adicionado <strong>${productQuantity}</strong> quantidade(s) de <strong>${name}</strong> ao estoque!`
+
+                    setTimeout(() => {
+
+                        popUp.style.display = 'none';
+
+                    }, 3500)
+
+
+                    let addProduct = document.getElementById("addProduct");
+                    addProduct.disabled = true;
+                    const originalText = addProduct.innerHTML; 
+                    
+                    addProduct.innerHTML = "Produto adicionado! ✔";
+                    
+                    setTimeout(function () {
+                        addProduct.disabled = false;
+                        addProduct.innerHTML = originalText; 
+                    }, 2000); 
+                    
+                    exitPopUp.addEventListener("click", function () {popUp.style.display = 'none'});
+                    ok.addEventListener("click", function () {popUp.style.display = 'none'});
+                    adicionar();
+                    
+                } else {
+
+                    popUpConfirmation.style.display = 'block';
+                    messageConfirmation.innerHTML = `Tem certeza que deseja <strong>adicionar</strong> este produto: <br> <br>
+                    <font color = '#9aaed9'><strong>Nome do produto:</strong></font>  ${name} <br>
+                    <font color = '#9aaed9'><strong>Quantidade:</strong></font>  ${productQuantity} <br>
+                    <font color = '#9aaed9'><strong>Tipo:</strong></font>  ${selectValue} <br>
+                    <font color = '#9aaed9'><strong>Código:</strong></font>  ${code} <br>`
+    
+                    
+                    let addProduct = document.getElementById("addProduct");
+                    addProduct.disabled = true;
+                    const originalText = addProduct.innerHTML; 
+                    
+                    addProduct.innerHTML = "Produto adicionado! ✔";
+                    
+                    setTimeout(function () {
+                        addProduct.disabled = false;
+                        addProduct.innerHTML = originalText; 
+                    }, 2000); 
+                    
+                    
+                    sim.addEventListener('click', function () {adicionar()});
+                    exitPopUpConfirmation.addEventListener('click', () => {cancelar()});
+                    nao.addEventListener('click', () => {cancelar()});
+
+                }
 
             }    
         }  
@@ -222,7 +252,6 @@ function adicionar() {
     let tbody = document.querySelector('.estoque-dados')
 
     popUpConfirmation.style.display = 'none'
-        
     
 
     try{
@@ -231,6 +260,7 @@ function adicionar() {
         
         productsStock.forEach((produto) => {
 
+            if (produto.productQuantity > 0) {
             let tr = document.createElement('tr');
             tr.classList.add(produto.name);
     
@@ -254,6 +284,7 @@ function adicionar() {
             
             tr.append(item, quantity, type, codigo)
 
+            }
         })
 
         let tbodyRows = document.querySelectorAll('#estoque tbody tr');
@@ -307,7 +338,7 @@ function adicionar() {
         
         togglePopUpTable();
 
-       console.log(productsStock)
+        console.log(productsStock)
     
         nameInput.focus();
 
@@ -315,6 +346,7 @@ function adicionar() {
 
         console.log('');
     }
+        
        
 }
 
@@ -406,7 +438,7 @@ function updateTableRetired() {
         document.getElementById('type').value = 'Tipo';
         document.getElementById('type').style.color = 'gray'
         document.getElementById('cod').value = '';
-
+        
         saveToLocalStorageRetiredBack(); //5r
         
         togglePopUpTable();
@@ -461,6 +493,8 @@ function loadFromLocalStorageRetired() {
 function saveToLocalStorageRetiredBack() {
     localStorage.setItem('productsRetired', JSON.stringify(productsRetired)); //6r
 }
+
+
 
 
     
