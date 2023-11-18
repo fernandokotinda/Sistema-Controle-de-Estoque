@@ -164,10 +164,10 @@ function arrayRetired() {
 
 }
 
-let tbodyRows = document.querySelectorAll('#estoque tbody tr');
+let tbodyRowsEstoque = document.querySelectorAll('#estoque tbody tr');
 try {
 
-    if (tbodyRows.length === 0) {
+    if (tbodyRowsEstoque.length === 0) {
 
         let thead = document.querySelector('#estoque thead tr');
         thead.remove();
@@ -176,6 +176,7 @@ try {
 
     console.log('')
 }
+
 function generateUniqueId() { return new Date().getTime() };
 
 //Texto ao clicar para baixar
@@ -228,3 +229,22 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+// function limparRetirada() {
+//     localStorage.removeItem('productsRetired');
+//     productsRetired = []; // Limpar a variável local também, se necessário
+//     adicionarTableRetired(); // Atualizar a tabela de retirada após limpar
+// }
+
+// // Função para limpar os dados da tabela de estoque
+// function limparEstoque() {
+//     localStorage.removeItem('productsStock');
+//     productsStock = []; // Limpar a variável local também, se necessário
+//     updateTableStock(); // Atualizar a tabela de estoque após limpar
+// }
+
+// let limparRetiradaBtn = document.querySelector('.limparRetiradaBtn');
+// limparRetiradaBtn.addEventListener('click', limparRetirada);
+
+// // Exemplo de chamada para limpar a tabela de estoque ao clicar em um botão
+// let limparEstoqueBtn = document.querySelector('.limparEstoqueBtn');
+// limparEstoqueBtn.addEventListener('click', limparEstoque);

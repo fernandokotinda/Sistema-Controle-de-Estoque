@@ -488,6 +488,7 @@ tbody tr:nth-child(2n) {
 .center {
     
     text-align: center;
+    margin: 15px;
 }
 #limpar {
 
@@ -532,6 +533,7 @@ tbody tr:nth-child(2n) {
     margin-top: 20px;
     gap: 35px;
 }
+
 
 
 

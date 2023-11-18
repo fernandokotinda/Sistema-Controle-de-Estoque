@@ -261,6 +261,7 @@ function adicionar() {
         productsStock.forEach((produto) => {
 
             if (produto.productQuantity > 0) {
+
             let tr = document.createElement('tr');
             tr.classList.add(produto.name);
     
@@ -287,10 +288,10 @@ function adicionar() {
             }
         })
 
-        let tbodyRows = document.querySelectorAll('#estoque tbody tr');
-        let theadRows = document.querySelectorAll('#estoque thead tr');
+        let tbodyRowsEstoque = document.querySelectorAll('#estoque tbody tr');
+        let theadRowsEstoque = document.querySelectorAll('#estoque thead tr');
 
-        if (tbodyRows.length >= 1 && theadRows.length === 0) {
+        if (tbodyRowsEstoque.length >= 1 && theadRowsEstoque.length === 0) {
     
             function createTable() {
                 
@@ -321,7 +322,7 @@ function adicionar() {
         
         }
 
-        if (theadRows.length > 1) {
+        if (theadRowsEstoque.length > 1) {
                 
             location.reload();
         }
