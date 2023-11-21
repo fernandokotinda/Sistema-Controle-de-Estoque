@@ -543,7 +543,9 @@ footer {
     font-size: 20px;
     position: fixed;
     bottom: 0;
-    left: 43%;
+    left: 50%;
+    transform: translateX(-40%);
+    text-align: center;
     padding-bottom: 20px;
 }
 footer a{
