@@ -535,6 +535,31 @@ tbody tr:nth-child(2n) {
     margin-top: 20px;
     gap: 35px;
 }
+footer {
+
+    color: white;
+    text-align: center;
+    font-family: 'Dosis', sans-serif;
+    font-size: 20px;
+    position: fixed;
+    bottom: 0;
+    left: 43%;
+    padding-bottom: 20px;
+}
+footer a{
+    
+    text-decoration: none;
+    color: rgb(207, 207, 207);
+}
+footer a:hover {
+
+    text-decoration: underline;
+    color: lightblue;
+}
+abbr {
+
+    text-decoration: none;
+}
 
 
 
