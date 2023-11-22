@@ -562,6 +562,23 @@ abbr {
 
     text-decoration: none;
 }
+@media (max-width: 1000px) {
+
+    .modal {
+
+        top: 20%;
+
+    }
+    .modal-content {
+        width: 80%;
+
+    }
+    #ok {
+
+        width: 25%;
+    
+    }
+}
 
 
 

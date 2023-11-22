@@ -16,9 +16,9 @@ selectElement.addEventListener("change", function () {
 //PopUp e download
 let popUp = document.getElementById("popUp");
 let exitPopUp = document.getElementById("fecharPopUp");
+let ok = document.querySelector("#ok");
 let message = document.querySelector(".popUpMessage");
 let messageConfirmation = document.querySelector('.popUpMessageConfirmation');
-let ok = document.querySelector("#ok");
 let popUpConfirmation = document.querySelector('#popUpConfirmation');
 
 //Possui algum dado na tabela  
@@ -229,4 +229,37 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+function verificarLarguraTela() {
+
+    let larguraTela = window.innerWidth;
+    let popUp = document.querySelector('.modal');
+    let exitPopUp = document.getElementById("fecharPopUp");
+    let ok = document.querySelector("#ok");
+    let message = document.querySelector(".popUpMessage");
+    
+
+    
+    if (larguraTela < 1001) {
+        
+        popUp.style.display = 'block'
+        message.innerHTML = 'Este site ainda não está responsivo para telas de celulares ou tablets, para uma melhor experiência visual, acesse o site por um <strong>computador</strong> ou <strong>notebook</strong>. Obrigado!'
+        message.style.textAlign = 'justify'
+
+        exitPopUp.addEventListener('click', () => {popUp.style.display = 'none'})
+        ok.addEventListener('click', () => {popUp.style.display = 'none'})
+        
+    } else {
+
+        popUp.style.display = 'none'
+
+    }
+
+    
+}
+
+verificarLarguraTela();
+
+// Adiciona um event listener para verificar quando a largura da tela muda
+window.addEventListener('resize', verificarLarguraTela);
 
